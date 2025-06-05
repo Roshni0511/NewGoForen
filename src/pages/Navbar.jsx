@@ -251,7 +251,7 @@ useEffect(() => {
         <div className="header__top-cta d-flex align-items-center gap-2">
           <img src="assets/img/icon/n_pad.svg" alt="" className="white-icon" style={{ width: 20 }} />
           <a href="tel:+917600909090" style={{ color: "#fff", fontWeight: 'bold', textDecoration: 'none' }}>
-            <span>Help Desk:</span> +91 76 00 90 90 90
+            <span>He vbdgftfh lp Desk:</span> +91 76 00 90 90 90
           </a>
         </div>
       </div>
