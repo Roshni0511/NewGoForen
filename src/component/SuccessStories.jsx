@@ -81,12 +81,13 @@ export default function SuccessStories() {
                           <div
                             className="xb-item--content"
                             dangerouslySetInnerHTML={{ __html: story.description }}
+                            style={{color:'#fff'}}
                           />
                           <div className="xb-item--bottom">
-                            <div className="xb-item--ratting">
+                           <div className="xb-item--ratting">
                               <img src="assets/img/icon/tr_rattig.png" alt="rating" />
                             </div>
-                            <h3 className="xb-item--title">
+                            <h3 className="xb-item--title" style={{color:'#fff'}}>
                               {story.heading}, <br /> {story.post}
                             </h3>
                           </div>

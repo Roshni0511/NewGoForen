@@ -151,36 +151,61 @@ export default function About() {
       </section>
       <Counter />
       {/* <!-- about end --> */}
-
-  <section className="mission pt-130 pb-130">
-      <div className="container">
-        {aboutData.map((item, index) => (
-          <div className="row align-items-center flex-row-reverse mt-none-30" key={item.id}>
-            <div className="col-lg-6 mt-30">
-              <div className="mission__img text-lg-end">
-                <div className="inner-img d-inline-block wow skewIn" data-wow-delay="200ms">
-                  <img
-                    src={`https://drive.google.com/thumbnail?id=${item.image_id}`}
-                    alt={item.heading}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-6 mt-30">
-              <div className="mission__content">
-                <div className="sec-title">
-                  <h2 className="mb-20 wow skewIn">
-                    {item.heading}<br />
-                    <span style={{ fontSize: '35px' }} dangerouslySetInnerHTML={{ __html: item.description.match(/<h2[^>]*>(.*?)<\/h2>/)?.[1] || '' }} />
-                  </h2>
-                  <div dangerouslySetInnerHTML={{ __html: item.description.replace(/<h2[^>]*>.*?<\/h2>/, '') }} />
-                </div>
-              </div>
+<section className="mission pt-130 pb-130">
+  <div className="container">
+    {aboutData.map((item, index) => (
+      <div
+        className={`row align-items-center mb-60 ${
+          index % 2 === 0 ? 'flex-row-reverse' : ''
+        }`}
+        key={item.id}
+      >
+        <div className="col-lg-6 mt-30">
+          <div className="mission__img text-lg-center">
+            <div
+              className="inner-img d-inline-block wow skewIn"
+              data-wow-delay="200ms"
+              style={{ display: 'block', marginBottom: '20px' }}
+            >
+              <img
+                src={`https://drive.google.com/thumbnail?id=${item.image_id}`}
+                alt={item.heading}
+                style={{
+             width:'482px',
+             height:'380px',
+                  margin: '0 auto',
+                  display: 'block',
+                }}
+              />
             </div>
           </div>
-        ))}
+        </div>
+        <div className="col-lg-6 mt-30">
+          <div className="mission__content">
+            <div className="sec-title">
+              <h2 className="mb-20 wow skewIn">
+                {item.heading}
+                <br />
+                <span
+                  style={{ fontSize: '35px' }}
+                  dangerouslySetInnerHTML={{
+                    __html:
+                      item.description.match(/<h2[^>]*>(.*?)<\/h2>/)?.[1] || '',
+                  }}
+                />
+              </h2>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: item.description.replace(/<h2[^>]*>.*?<\/h2>/, ''),
+                }}
+              />
+            </div>
+          </div>
+        </div>
       </div>
-    </section>
+    ))}
+  </div>
+</section>
 
         {/* <!-- team start --> */}
         <section class="team pt-120 pb-130 bg_img" style={{  backgroundImage: `url(${background1})`, }}>
@@ -243,7 +268,7 @@ export default function About() {
         <div className="container">
           <div className="row align-items-center flex-row-reverse mt-none-30">
             <div className="col-lg-6 mt-30">
-              <div className="mission__img text-lg-end">
+              <div className="mission__img text-lg-center">
                 <div
                   className="inner-img d-inline-block wow skewIn"
                   data-wow-delay="200ms"
