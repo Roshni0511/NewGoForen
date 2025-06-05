@@ -259,7 +259,7 @@ export default function Aboutfounder() {
                 width:'260px',
                 height:'325px'
               }}
-            />
+              />
           </div>
           <div className="xb-item--holder">
             <h3 className="xb-item--name">
