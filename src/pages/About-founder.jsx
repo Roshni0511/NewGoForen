@@ -255,6 +255,10 @@ export default function Aboutfounder() {
             <img
               src={`https://drive.google.com/thumbnail?id=${member.image_id}`}
               alt={member.name}
+                 style={{
+                width:'260px',
+                height:'325px'
+              }}
             />
           </div>
           <div className="xb-item--holder">
