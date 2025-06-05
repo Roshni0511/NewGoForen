@@ -17,51 +17,60 @@ function useQuery() {
 
 export default function Immigrationprvisa() {
 
-  
-  
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 576);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 576);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   // data-background img start
   const [background, setBackground] = useState("");
-  
+
   useEffect(() => {
     const backgroundUrl = "/assets/pic/breadcrumb-bg.jpg";
     setBackground(backgroundUrl);
   }, []);
-  
+
   const [background12, setBackground12] = useState("");
-  
+
   useEffect(() => {
     const backgroundUrl12 = "assets/img/bg/blog_bg.png";
     setBackground12(backgroundUrl12);
   }, []);
   // data-background img end
-  
+
   const query = useQuery();
   const id = query.get('id');
 
   const [visa, setVisa] = useState(null);
   const [loading, setLoading] = useState(true);
-  
+
   useEffect(() => {
     if (id) {
       fetch(`http://localhost:8000/get_visa_service_detail/${id}`)
-      .then(res => res.json())
-      .then(data => {
-        setVisa(data);
-        setLoading(false);
+        .then(res => res.json())
+        .then(data => {
+          setVisa(data);
+          setLoading(false);
         })
         .catch(err => {
           console.error("Error fetching visa service:", err);
           setLoading(false);
         });
-      } else {
-        setLoading(false); // If no ID, stop loading
+    } else {
+      setLoading(false); // If no ID, stop loading
     }
   }, [id]);
-  
+
   // // ✅ Conditional logic is inside render
   if (loading) return <div>Loading...</div>;
   if (!visa || visa.error) return <div>Visa service not found</div>;
-  
+
   const blogContent = visa?.description ? visa.description.replace(/<[^>]+>/g, '') : '';
   return (
     <div>
@@ -88,47 +97,156 @@ export default function Immigrationprvisa() {
         }}></div>
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           <div className="breadcrumb__content text-white py-5">
-            <h2>{visa.visa_type}</h2>
-            <ul className="breadcrumb__list d-flex flex-wrap gap-2 mt-3">
+            {/* <h2>{visa.visa_type}</h2> */}
+            <h2 className="breadcrumb__title" style={{ color: '#fff' }}>{visa.visa_type}</h2>
+            {/* <ul className="breadcrumb__list d-flex flex-wrap gap-2 mt-3">
               <li><a href="/" className="text-white text-decoration-underline">Home</a></li>
               <li>Visa Details</li>
               <li>{visa.visa_type}</li>
+            </ul> */}
+            <ul className="breadcrumb__list clearfix">
+              <li className="breadcrumb-item">
+                <a href="/">Home</a>
+              </li>
+              <li className="breadcrumb-item">
+                <a href="Visa-services">Visa Services</a>
+              </li>
+              <li className="breadcrumb-item">{visa.visa_type}</li>
             </ul>
           </div>
         </div>
       </section>
 
-      {/* Main Content */}
-      <div className="py-5" style={{ backgroundColor: '#f8f8f8' }}>
-        <div className="container">
-          <div className="row justify-content-center">
 
-            {/* Visa Content */}
-            <div className="col-lg-8 col-md-12 mb-4">
-              <div className="p-4 bg-white shadow rounded">
-                <h3 className="text-success mb-3">{visa.visa_type}</h3>
-                <div className="d-flex flex-wrap text-muted gap-3 mb-3">
-                  <span className="d-flex align-items-center gap-1 text-warning">
-                    <FaCalendarAlt />
-                    {new Date(visa.created_at).toLocaleDateString("en-US", {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                    })}
-                  </span>
-                  <span className="d-flex align-items-center gap-1 text-secondary">
-                    <FaTags /> Immigration - Visa Service
-                  </span>
+
+      {/* <!-- coaching single start --> */}
+      <section class="coaching-single pt-120 pb-130">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="sidebar-widget">
+                <div class="widget">
+                  <ul class="widget-category list-unstyled">
+
+                    <li><a class="active" href="/Immigration-pr-visa"> Immigration - PR Visa<span><img src="assets/img/icon/arrow_up.svg" /></span></a></li>
+                    <li><a href="/Immigration-pr-visa">Student Visa<span><img src="assets/img/icon/arrow_up.svg" /></span></a></li>
+                    <li><a href="/Immigration-pr-visa"> Visitor Visa<span><img src="assets/img/icon/arrow_up.svg" /></span></a></li>
+                    <li><a href="/Immigration-pr-visa">Investor Visa<span><img src="assets/img/icon/arrow_up.svg" /></span></a></li>
+                    <li><a href="/Immigration-pr-visa"> Work Permit Visa <span><img src="assets/img/icon/arrow_up.svg" /></span></a></li>
+                  </ul>
+                </div>
+                <div className="blog-sidebar" style={{ paddingLeft: '0px' }}>
+
+                  <div className="widget">
+                    <h3 className="widget-title">
+                      Countries for Student Visa
+                    </h3>
+                    <div className="widget__post">
+                      <div className="widget__post-item ul_li">
+                        <div className="post-thumb">
+                          <a href="">
+                            <img src="/assets/pic/canada.png" alt="" />
+                          </a>
+                        </div>
+                        <div className="post-content">
+                          <h4 className="post-title border-effect-2">
+                            <a href=""> Canada </a>
+                          </h4>
+                          <span className="post-date">
+                            <a href="/Countries" style={{ color: '#787B84' }}>Read More</a>
+                            <span>
+                              <img src="assets/img/icon/right_arrow.svg" alt="" />
+                            </span>
+                          </span>
+                        </div>
+                      </div>
+                      <div className="widget__post-item ul_li">
+                        <div className="post-thumb">
+                          <a href="">
+                            <img src="/assets/pic/australia.png" alt="" />
+                          </a>
+                        </div>
+                        <div className="post-content">
+                          <h4 className="post-title border-effect-2">
+                            <a href=""> Australia </a>
+                          </h4>
+                          <span className="post-date">
+                            <a href="/Countries" style={{ color: '#787B84' }}>Read More</a>
+                            <span>
+                              <img src="assets/img/icon/right_arrow.svg" alt="" />
+                            </span>
+                          </span>
+                        </div>
+                      </div>
+                      <div className="widget__post-item ul_li">
+                        <div className="post-thumb">
+                          <a href="">
+                            <img src="/assets/pic/new-zealand.jpg" alt="" />
+                          </a>
+                        </div>
+                        <div className="post-content">
+                          <h4 className="post-title border-effect-2">
+                            <a href=""> New Zealand </a>
+                          </h4>
+                          <span className="post-date">
+                            <a href="/Countries" style={{ color: '#787B84' }}>Read More</a>
+                            <span>
+                              <img src="assets/img/icon/right_arrow.svg" alt="" />
+                            </span>
+                          </span>
+                        </div>
+                      </div>
+                      <div className="widget__post-item ul_li">
+                        <div className="post-thumb">
+                          <a href="">
+                            <img src="/assets/pic/USA.jpg" alt="" />
+                          </a>
+                        </div>
+                        <div className="post-content">
+                          <h4 className="post-title border-effect-2">
+                            <a href=""> USA </a>
+                          </h4>
+                          <span className="post-date">
+                            <a href="/Countries" style={{ color: '#787B84' }}>Read More</a>
+                            <span>
+                              <img src="assets/img/icon/right_arrow.svg" alt="" />
+                            </span>
+                          </span>
+                        </div>
+                      </div>
+                      <div className="widget__post-item ul_li">
+                        <div className="post-thumb">
+                          <a href="">
+                            <img src="/assets/pic/uk.png" alt="" />
+                          </a>
+                        </div>
+                        <div className="post-content">
+                          <h4 className="post-title border-effect-2">
+                            <a href="">UK</a>
+                          </h4>
+                          <span className="post-date">
+                            <a href="/Countries" style={{ color: '#787B84' }}>Read More</a>
+                            <span>
+                              <img src="assets/img/icon/right_arrow.svg" alt="" />
+                            </span>
+                          </span>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
                 </div>
 
-                {/* Share Buttons */}
-                <div className="d-flex flex-wrap gap-2 mb-4">
-                  <button className="btn btn-sm btn-primary"><FaFacebookF /> Facebook</button>
-                  <button className="btn btn-sm btn-info"><FaLinkedinIn /> LinkedIn</button>
-                  <button className="btn btn-sm btn-dark">X Post</button>
-                  <button className="btn btn-sm btn-success"><FaWhatsapp /> WhatsApp</button>
-                </div>
-
+              </div>
+            </div>
+            <div class="col-lg-8">
+              <div class="single-content">
+                <h3> </h3>
+                <h3>{visa.visa_type}</h3>
+                <div
+                  style={{ lineHeight: '1.7' }}
+                  dangerouslySetInnerHTML={{ __html: visa.description }}
+                />
                 {/* Visa Image */}
                 {visa.image_id && (
                   <div className="mb-3">
@@ -136,72 +254,209 @@ export default function Immigrationprvisa() {
                       src={`https://drive.google.com/thumbnail?id=${visa.image_id}`}
                       alt={visa.visa_type}
                       className="img-fluid rounded"
+                      style={{
+                        width: '100%',
+                        height: window.innerWidth < 576 ? 'auto' : '393px'
+                      }}
                     />
                   </div>
                 )}
+              
+                <h3 class="mt-70">How Go Foren work</h3>
+                <ul class="about-list ul_li list-unstyled">
+                  <li>
+                    <div class="xb-item--inner" style={{
+                      backgroundImage: 'linear-gradient(135deg, rgba(214, 131, 48, 0.4), rgba(158, 63, 63, 0))',
 
-                {/* Description */}
-                <div
-                  style={{ lineHeight: '1.7' }}
-                  dangerouslySetInnerHTML={{ __html: visa.description }}
-                />
+                    }}>
+                      <div class="xb-item--number">1</div>
+                      <div class="xb-item--holder">
+                        <h3 class="xb-item--title mb-10">Choose your visa type</h3>
+                        <div class="xb-item--description">
+                          Determine the Visa type for your travel
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="xb-item--inner" style={{
+                      backgroundImage: 'linear-gradient(135deg, rgba(214, 131, 48, 0.4), rgba(158, 63, 63, 0))',
 
-                <p className="fw-bold mt-4">
-                  For better understanding, contact <span className="text-primary">GOFOREN</span> at 7600909090.
-                </p>
+                    }}>
 
-                <p>
-                  Click for the{" "}
-                  <a
-                    href={`https://translate.google.com/?sl=en&tl=gu&text=${encodeURIComponent(blogContent)}&op=translate`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-decoration-underline text-info"
-                  >
-                    Gujarati translate
-                  </a>
-                </p>
-              </div>
-            </div>
+                      <div class="xb-item--number color-2">2</div>
+                      <div class="xb-item--holder">
+                        <h3 class="xb-item--title mb-10">Contact our branches</h3>
+                        <div class="xb-item--description">
+                          Start your transaction by applying..
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="xb-item--inner" style={{
+                      backgroundImage: 'linear-gradient(135deg, rgba(214, 131, 48, 0.4), rgba(158, 63, 63, 0))',
 
-            {/* Sidebar */}
-            <div className="col-lg-4 col-md-12 mb-4">
-              <div className="bg-white p-4 rounded shadow">
-                <h5 className="border-bottom pb-2 mb-3 text-success">Latest News</h5>
-                <ul className="list-unstyled">
-                  <li className="mb-2 border-bottom pb-2">USCIS Delivers on National Security…</li>
-                  <li className="mb-2 border-bottom pb-2">Schengen visa fees hiked</li>
-                  <li className="mb-2">Express Entry: IRCC aims to resume FS…</li>
+                    }}>
+                      <div class="xb-item--number color-3">3</div>
+                      <div class="xb-item--holder">
+                        <h3 class="xb-item--title mb-10">Submit All Your Documents</h3>
+                        <div class="xb-item--description">
+                          Collect all the required documents  the..
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="xb-item--inner" style={{
+                      backgroundImage: 'linear-gradient(135deg, rgba(214, 131, 48, 0.4), rgba(158, 63, 63, 0))',
+
+                    }}>
+                      <div class="xb-item--number color-4">4</div>
+                      <div class="xb-item--holder">
+                        <h3 class="xb-item--title mb-10">Passport delivery</h3>
+                        <div class="xb-item--description">
+                          Receive your visa, which is finalized..
+                        </div>
+                      </div>
+                    </div>
+                  </li>
                 </ul>
+
+                <h3 class="mt-70">Conclusion</h3>
+                <p>Immigrating to Canada can be a complex and time-consuming process, but with Go Foren by your side, you can rest assured that your application will be handled with the utmost care and expertise. Our team of best immigration consultants and registered immigration consultants is dedicated to helping you achieve your Canadian immigration goals. . </p>
+                <div class="row align-items-center mt-10">
+                  <div class="col-lg-6 mt-30">
+                    <img src="/assets/pic/course.jpg" alt="" />
+                  </div>
+                  <div class="col-lg-6 mt-30">
+                    <ul class="single-content-list list-unstyled pl-25">
+                      <li><div className="xb-item--ratting" style={{ marginRight: '10px' }}>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="#e38508"
+                        >
+                          <path d="M12 .587l3.668 7.568L24 9.75l-6 5.852L19.336 24 12 19.896 4.664 24 6 15.602 0 9.75l8.332-1.595z" />
+                        </svg>
+                      </div>Cultural Enrichmen</li>
+                      <li><div className="xb-item--ratting" style={{ marginRight: '10px' }}>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="#e38508"
+                        >
+                          <path d="M12 .587l3.668 7.568L24 9.75l-6 5.852L19.336 24 12 19.896 4.664 24 6 15.602 0 9.75l8.332-1.595z" />
+                        </svg>
+                      </div>Language Proficiency</li>
+                      <li><div className="xb-item--ratting" style={{ marginRight: '10px' }}>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="#e38508"
+                        >
+                          <path d="M12 .587l3.668 7.568L24 9.75l-6 5.852L19.336 24 12 19.896 4.664 24 6 15.602 0 9.75l8.332-1.595z" />
+                        </svg>
+                      </div>Quality of Life</li>
+                      <li><div className="xb-item--ratting" style={{ marginRight: '10px' }}>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="#e38508"
+                        >
+                          <path d="M12 .587l3.668 7.568L24 9.75l-6 5.852L19.336 24 12 19.896 4.664 24 6 15.602 0 9.75l8.332-1.595z" />
+                        </svg>
+                      </div>Career Opportunities</li>
+                      <li><div className="xb-item--ratting" style={{ marginRight: '10px' }}>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="#e38508"
+                        >
+                          <path d="M12 .587l3.668 7.568L24 9.75l-6 5.852L19.336 24 12 19.896 4.664 24 6 15.602 0 9.75l8.332-1.595z" />
+                        </svg>
+                      </div>Business Setup</li>
+                    </ul>
+                  </div>
+                </div>
+
               </div>
             </div>
-
           </div>
         </div>
-      </div>
+      </section>
+      {/* <!-- coaching single end --> */}
+    
 
       {/* Working Time Section */}
       <div style={{ background: '#edf3f5', padding: '40px 0' }}>
-        <div className="container">
-          <div className="text-center mb-5">
-            <h2 className="mb-3">Our Working Time</h2>
-            <p className="text-muted">We are available throughout the week to help you with your visa and training needs.</p>
-          </div>
-          <div className="row justify-content-center text-center">
-            <div className="col-lg-3 col-md-6 mb-3 px-3">
-              <div className="bg-white shadow rounded p-4 h-100">
-                <h5>Monday - Saturday</h5>
-                <p className="text-muted">10.00 a.m. to 6.30 p.m.</p>
-              </div>
-            </div>
-            <div className="col-lg-3 col-md-6 mb-3 px-3">
-              <div className="bg-white shadow rounded p-4 h-100">
-                <h5>Sunday</h5>
-                <p className="text-muted">10.00 a.m. to 12.30 p.m.</p>
+       <div className="container">
+        <div
+          className="xb-newsletter1 pos-rel "
+          style={{
+            backgroundImage: `url(${background12})`,
+            // minHeight: '400px',
+            position: "relative",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            margin: "30px 0px",
+            background:'#edf3f5'
+          }}
+        >
+          <div className="row">
+            <div className="col-12">
+              <div>
+                <div className="sec-title mb-40 text-center">
+                  <h2 className="mb-20 wow skewIn">Our Working Time</h2>
+                  <p style={{ textAlign: "center" }}>
+                    We are available throughout the week to help you with your
+                    visa and training needs.
+                  </p>
+                </div>
+
+                <div className="row justify-content-center text-center">
+                  <div
+                    className="col-lg-3 mt-30 col-md-6"
+                    style={{
+                      boxShadow: " 0px 14px 19px rgb(221 229 236)",
+                      padding: "20px",
+                      margin: "5px",
+                    }}
+                  >
+                    <div>
+                      <h5 className="mb-2">Monday - Saturday :</h5>
+                      <p style={{ textAlign: "center" }}>
+                        10.00 a.m. to 6.30 p.m.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="col-lg-3 mt-30 col-md-6" style={{
+                      boxShadow: "0px 14px 19px rgb(221 229 236)",
+                      padding: "20px",
+                      margin: "5px",
+                    }}
+                  >
+                    <h5 className="mb-2">Sunday :</h5>
+                    <p style={{ textAlign: "center" }}>
+                      10.00 a.m. to 12.30 p.m.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
       </div>
 
       <Footer />

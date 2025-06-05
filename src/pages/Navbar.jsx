@@ -5,28 +5,107 @@ import { FaTimes } from 'react-icons/fa';
 
 export default function Navbar() {
   
-  const [visaServices, setVisaServices] = useState([]);
+  // const [visaServices, setVisaServices] = useState([]);
 
-  useEffect(() => {
-    fetch('http://localhost:8000/get_visa_services/')
-      .then((res) => res.json())
-      .then((data) => {
-        setVisaServices(data);
-      })
-      .catch((err) => console.error("Failed to fetch visa services:", err));
-  }, []);
-  const [Courses, setCourses] = useState([]);
+  // useEffect(() => {
+  //   fetch('http://localhost:8000/get_visa_services/')
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setVisaServices(data);
+  //     })
+  //     .catch((err) => console.error("Failed to fetch visa services:", err));
+  // }, []);
+  // const [Courses, setCourses] = useState([]);
 
-  useEffect(() => {
-    fetch('http://localhost:8000/get_course_data/')
-      .then((res) => res.json())
-      .then((data) => {
-        setCourses(data);
-      })
-      .catch((err) => console.error("Failed to fetch Courses:", err));
-  }, []);
+  // useEffect(() => {
+  //   fetch('http://localhost:8000/get_course_data/')
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setCourses(data);
+  //     })
+  //     .catch((err) => console.error("Failed to fetch Courses:", err));
+  // }, []);
 
+  // useEffect(() => {
+  //   if ($(".stricky").length) {
+  //     $(".stricky")
+  //       .addClass("original")
+  //       .clone(true)
+  //       .insertAfter(".stricky")
+  //       .addClass("stricked-menu")
+  //       .removeClass("original");
+  //   }
 
+  //   const handleScroll = () => {
+  //     if ($(".stricked-menu").length) {
+  //       const headerScrollPos = 100;
+  //       const stricky = $(".stricked-menu");
+  //       if ($(window).scrollTop() > headerScrollPos) {
+  //         stricky.addClass("stricky-fixed");
+  //       } else {
+  //         stricky.removeClass("stricky-fixed");
+  //       }
+  //     }
+  //   };
+
+  //   $(window).on("scroll", handleScroll);
+
+  //   return () => {
+  //     $(window).off("scroll", handleScroll);
+  //   };
+  // }, []);
+
+const [visaServices, setVisaServices] = useState([]);
+const [Courses, setCourses] = useState([]);
+const [dataLoaded, setDataLoaded] = useState(false);
+
+useEffect(() => {
+  Promise.all([
+    fetch('http://localhost:8000/get_visa_services/').then((res) => res.json()),
+    fetch('http://localhost:8000/get_course_data/').then((res) => res.json())
+  ])
+    .then(([visaData, courseData]) => {
+      setVisaServices(visaData);
+      setCourses(courseData);
+      setDataLoaded(true); // ✅ mark data as ready
+    })
+    .catch((err) => {
+      console.error("Failed to fetch data:", err);
+    });
+}, []);
+
+useEffect(() => {
+  if (!dataLoaded) return;
+
+  // ✅ Clone only after data is loaded and rendered
+  if ($(".stricky").length) {
+    $(".stricky").next(".stricked-menu").remove(); // remove if already exists
+    $(".stricky")
+      .addClass("original")
+      .clone(true)
+      .insertAfter(".stricky")
+      .addClass("stricked-menu")
+      .removeClass("original");
+  }
+
+  const handleScroll = () => {
+    if ($(".stricked-menu").length) {
+      const headerScrollPos = 100;
+      const stricky = $(".stricked-menu");
+      if ($(window).scrollTop() > headerScrollPos) {
+        stricky.addClass("stricky-fixed");
+      } else {
+        stricky.removeClass("stricky-fixed");
+      }
+    }
+  };
+
+  $(window).on("scroll", handleScroll);
+
+  return () => {
+    $(window).off("scroll", handleScroll);
+  };
+}, [dataLoaded]); // 👈 depend on dataLoaded
 
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
@@ -158,34 +237,7 @@ export default function Navbar() {
       $(".xb-menu-close, .xb-header-menu-backdrop").off();
     };
   }, []);
-  useEffect(() => {
-    if ($(".stricky").length) {
-      $(".stricky")
-        .addClass("original")
-        .clone(true)
-        .insertAfter(".stricky")
-        .addClass("stricked-menu")
-        .removeClass("original");
-    }
 
-    const handleScroll = () => {
-      if ($(".stricked-menu").length) {
-        const headerScrollPos = 100;
-        const stricky = $(".stricked-menu");
-        if ($(window).scrollTop() > headerScrollPos) {
-          stricky.addClass("stricky-fixed");
-        } else {
-          stricky.removeClass("stricky-fixed");
-        }
-      }
-    };
-
-    $(window).on("scroll", handleScroll);
-
-    return () => {
-      $(window).off("scroll", handleScroll);
-    };
-  }, []);
 
   return (
     <div>
@@ -225,7 +277,7 @@ export default function Navbar() {
                 </a>
               </div>
               <div className="main-menu__wrap ul_li navbar navbar-expand-lg">
-                <nav className="main-menu collapse navbar-collapse">
+                <nav className="main-menu collapse navbar-collapse hoverclass">
                   <ul>
                     <li>
                       <a href="/">
@@ -258,10 +310,10 @@ export default function Navbar() {
                     </li>
                     <li className="menu-item-has-children">
                       <a href="/Visa-services">
-                        <span>Visa Services</span>
+                        <span style={{color:'#fff'}}>Visa Services</span>
                       </a>
                       <ul className="submenu">
-            {visaServices.map((item) => (
+                {visaServices.map((item) => (
               <li key={item.id}>
                           <a href= {`/visa-services-detail?id=${item.id}`}>
                             <span>{item.visa_type}</span>
@@ -273,7 +325,7 @@ export default function Navbar() {
 
                     <li className="menu-item-has-children">
                       <a href="/Courses">
-                        <span>Courses</span>
+                        <span style={{color:'#fff'}}>Courses</span>
                       </a>
                       <ul className="submenu">
                       {Courses.map((item) => (
@@ -450,7 +502,7 @@ export default function Navbar() {
                     <a href="/Visa-services">
                       <span >Visa Services</span>
                     </a>
-                    <ul className="sub-menu">
+                    {/* <ul className="sub-menu">
                       <li className="menu-item">
                         <a href="/Immigration-pr-visa">
                           <span>Immigration - PR Visa</span>
@@ -476,7 +528,16 @@ export default function Navbar() {
                           <span>Work Permit Visa</span>
                         </a>
                       </li>
-                    </ul>
+                    </ul> */}
+                     <ul className="sub-menu">
+                {visaServices.map((item) => (
+              <li className="menu-item" key={item.id}>
+                          <a href= {`/visa-services-detail?id=${item.id}`}>
+                            <span>{item.visa_type}</span>
+                          </a>
+                        </li>
+                            ))}
+                      </ul>
                   </li>
 
                   <li className="menu-item menu-item-has-children">
@@ -510,6 +571,15 @@ export default function Navbar() {
                         </a>
                       </li>
                     </ul>
+                    <ul className="sub-menu">
+                      {Courses.map((item) => (
+                        <li className="menu-item" key={item.id}>
+                          <a href= {`/Course-details?id=${item.id}`}>
+                            <span>{item.course_name}</span>
+                          </a>
+                        </li>
+                            ))}
+                      </ul>
                   </li>
                   <li className="menu-item menu-item-has-children">
                     <a href="#">
