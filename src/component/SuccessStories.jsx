@@ -85,7 +85,52 @@ export default function SuccessStories() {
                           />
                           <div className="xb-item--bottom">
                            <div className="xb-item--ratting">
-                              <img src="assets/img/icon/tr_rattig.png" alt="rating" />
+                              
+                              <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="20"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="#e38508"
+                        >
+                          <path d="M12 .587l3.668 7.568L24 9.75l-6 5.852L19.336 24 12 19.896 4.664 24 6 15.602 0 9.75l8.332-1.595z" />
+                        </svg>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="20"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="#e38508"
+                        >
+                          <path d="M12 .587l3.668 7.568L24 9.75l-6 5.852L19.336 24 12 19.896 4.664 24 6 15.602 0 9.75l8.332-1.595z" />
+                        </svg>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="20"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="#e38508"
+                        >
+                          <path d="M12 .587l3.668 7.568L24 9.75l-6 5.852L19.336 24 12 19.896 4.664 24 6 15.602 0 9.75l8.332-1.595z" />
+                        </svg>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="20"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="#e38508"
+                        >
+                          <path d="M12 .587l3.668 7.568L24 9.75l-6 5.852L19.336 24 12 19.896 4.664 24 6 15.602 0 9.75l8.332-1.595z" />
+                        </svg>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="20"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="#e38508"
+                        >
+                          <path d="M12 .587l3.668 7.568L24 9.75l-6 5.852L19.336 24 12 19.896 4.664 24 6 15.602 0 9.75l8.332-1.595z" />
+                        </svg>
                             </div>
                             <h3 className="xb-item--title" style={{color:'#fff'}}>
                               {story.heading}, <br /> {story.post}

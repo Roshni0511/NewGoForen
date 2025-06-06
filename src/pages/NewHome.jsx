@@ -52,6 +52,16 @@ function stripHtml(html) {
 ];
 
 export default function NewHome() {
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 576);
+    
+      useEffect(() => {
+        const handleResize = () => {
+          setIsMobile(window.innerWidth < 576);
+        };
+    
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+      }, []);
   const [faqData, setFaqData] = useState([]);
 
   useEffect(() => {
@@ -2830,7 +2840,10 @@ const cards = [
                 <div className="xb-item--inner">
                   <div className="xb-item--img">
                     <a href={`/StayInformedDetails?id=${blog.id}`}>
-                      <img src={imageUrl} alt={blog.heading} style={{width:"100%"}}/>
+                      <img src={imageUrl} alt={blog.heading}   style={{
+                        width: '100%',
+                        height: window.innerWidth < 576 ? 'auto' : '215px'
+                      }}/>
                     </a>
                   </div>
                   <div className="xb-item--holder">

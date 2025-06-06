@@ -97,9 +97,7 @@ export default function Inquiryassociation() {
               <li className="breadcrumb-item">
                 <a href="/">Home</a>
               </li>
-              <li className="breadcrumb-item">
-                <a href="/Visa-services">Visa Services</a>
-              </li>
+             
               <li className="breadcrumb-item">Inquiry For Assocation with us</li>
             </ul>
             </div>
@@ -132,7 +130,7 @@ export default function Inquiryassociation() {
 
       <section className="association-section pt-120 pb-120">
       <div className="container">
-        <div className="header  text-white text-center fw-bold py-3 rounded-top" style={{background:'#00cc99'}}>
+        <div className="header  text-white text-center fw-bold py-3 rounded-top" style={{background:'rgb(227 133 8)'}}>
           Inquiry For Association with us
         </div>
         <div className="d-flex flex-wrap justify-content-center border rounded-bottom overflow-auto">
@@ -147,7 +145,7 @@ export default function Inquiryassociation() {
               <div className="card-footer text-center" style={{background:'#fff'}}>
               <button
                     className="btn text-white px-4"
-                    style={{ background: '#00cc99' }}
+                    style={{ background: 'rgb(227 133 8)' }}
                     onClick={handleShow}
                   >
                     Inquiry
@@ -216,8 +214,8 @@ export default function Inquiryassociation() {
     </div>
   </DialogContent>
   <DialogActions>
-    <Button onClick={handleClose}>Close</Button>
-    <Button variant="contained" style={{ background: "#00cc99" }}>
+    <Button onClick={handleClose} style={{ color: "rgb(227 133 8)" }}>Close</Button>
+    <Button variant="contained" style={{ background: "rgb(227 133 8)" }}>
       Send
     </Button>
   </DialogActions>

@@ -115,7 +115,7 @@ export default function Countries() {
                       </div>
                       <div className="post-content">
                         <h4 className="post-title border-effect-2">
-                          <a href=""> Canada </a>
+                           Canada 
                         </h4>
                         <span className="post-date" >
                           <a href="/Countries" style={{color:'#787B84'}}>Read More</a>
@@ -133,7 +133,7 @@ export default function Countries() {
                       </div>
                       <div className="post-content">
                         <h4 className="post-title border-effect-2">
-                          <a href=""> Australia </a>
+                           Australia 
                         </h4>
                         <span className="post-date">
                          <a href="/Countries" style={{color:'#787B84'}}>Read More</a>
@@ -151,7 +151,7 @@ export default function Countries() {
                       </div>
                       <div className="post-content">
                         <h4 className="post-title border-effect-2">
-                          <a href=""> New Zealand </a>
+                           New Zealand 
                         </h4>
                         <span className="post-date">
                           <a href="/Countries" style={{color:'#787B84'}}>Read More</a>
@@ -169,7 +169,7 @@ export default function Countries() {
                       </div>
                       <div className="post-content">
                         <h4 className="post-title border-effect-2">
-                          <a href=""> USA </a>
+                           USA 
                         </h4>
                         <span className="post-date">
                          <a href="/Countries" style={{color:'#787B84'}}>Read More</a>
@@ -187,7 +187,7 @@ export default function Countries() {
                       </div>
                       <div className="post-content">
                         <h4 className="post-title border-effect-2">
-                          <a href="">UK</a>
+                          UK
                         </h4>
                         <span className="post-date">
                          <a href="/Countries" style={{color:'#787B84'}}>Read More</a>

@@ -3,7 +3,16 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 
 export default function News() {
+   const [isMobile, setIsMobile] = useState(window.innerWidth < 576);
   
+    useEffect(() => {
+      const handleResize = () => {
+        setIsMobile(window.innerWidth < 576);
+      };
+  
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }, []);
           const [background12, setBackground12] = useState("");
         
           useEffect(() => {
@@ -33,9 +42,13 @@ export default function News() {
       {items.map((item) => (
           <article key={item.id} className="post-details"  style={{ marginBottom:"5rem", border:"1px solid gray", padding: "30px" , borderRadius:"10px" }}>
             <div className="post-thumb">
-              <img style={{ width: '100%' }}
+              <img
                 src={`https://drive.google.com/thumbnail?id=${item.image_id}`}
                 alt={item.heading}
+                style={{
+                        width: '100%',
+                        height: window.innerWidth < 576 ? 'auto' : '290px'
+                      }}
               />
             </div>
             <ul className="post-meta ul_li">
@@ -60,7 +73,7 @@ export default function News() {
                 style={{
                   color: "#fff",
                   padding: "20px ",
-                  background: "#00cc99",
+                  background: "rgb(227 133 8)",
                   borderRadius: "10px",
                 }}
               >
@@ -82,7 +95,7 @@ export default function News() {
                       style={{
                         color: "#fff",
                         padding: "15px ",
-                        background: "#00cc99",
+                        background: "rgb(227 133 8)",
                         borderRadius: "10px",
                       }}
                     >
@@ -100,22 +113,22 @@ export default function News() {
                       </a>
                     </li>
                     <li>
-                      <a href="/Student-visa">
+                      <a href="/Immigration-pr-visa">
                         <i className="far fa-arrow-up"></i>Student Visa
                       </a>
                     </li>
                     <li>
-                      <a href="/Visitor-visa">
+                      <a href="/Immigration-pr-visa">
                         <i className="far fa-arrow-up"></i> Visitor Visa
                       </a>
                     </li>
                     <li>
-                      <a href="/Investor-visa">
+                      <a href="/Immigration-pr-visa">
                         <i className="far fa-arrow-up"></i> Investor Visa
                       </a>
                     </li>
                     <li>
-                      <a href="/Work-permit-visa">
+                      <a href="/Immigration-pr-visa">
                         <i className="far fa-arrow-up"></i>Work Permit Visa
                       </a>
                     </li>

@@ -18,26 +18,26 @@ const custom_input = {
 
 export default function Contact() {
 
-const handleSelect2 = (e) => {
-  const { name, value } = e.target;
-  setFormData((prev) => ({ ...prev, [name]: value }));
-};
-      const [countries, setCountries] = useState([]);
-    const [VisaTypes, setVisaTypes] = useState([]);
-  
-    // Fetch country data
-    useEffect(() => {
-      axios.get("http://localhost:8000/get_country_data/")
-        .then((res) => setCountries(res.data))
-        .catch((err) => console.error("Error fetching countries:", err));
-    }, []);
-  
-    // Fetch visa data
-    useEffect(() => {
-      axios.get("http://localhost:8000/get_visa_services/")
-        .then((res) => setVisaTypes(res.data))
-        .catch((err) => console.error("Error fetching countries:", err));
-    }, []);
+  const handleSelect2 = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+  const [countries, setCountries] = useState([]);
+  const [VisaTypes, setVisaTypes] = useState([]);
+
+  // Fetch country data
+  useEffect(() => {
+    axios.get("http://localhost:8000/get_country_data/")
+      .then((res) => setCountries(res.data))
+      .catch((err) => console.error("Error fetching countries:", err));
+  }, []);
+
+  // Fetch visa data
+  useEffect(() => {
+    axios.get("http://localhost:8000/get_visa_services/")
+      .then((res) => setVisaTypes(res.data))
+      .catch((err) => console.error("Error fetching countries:", err));
+  }, []);
 
   const navigate = useNavigate();
 
@@ -55,26 +55,26 @@ const handleSelect2 = (e) => {
   });
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     if (captchaInput !== captchaCode) {
       alert("Invalid captcha code. Please try again.");
       generateCaptcha();
       setCaptchaInput("");
       return;
     }
-  
+
     const data = new FormData();
     for (const key in formData) {
       data.append(key, formData[key]);
     }
-  
+
     try {
       const response = await axios.post('http://localhost:8000/visa-inquiry/', data, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-  
+
       if (response.status === 201 || response.status === 200) {
         window.location.reload();
       }
@@ -82,7 +82,7 @@ const handleSelect2 = (e) => {
       console.error("Error submitting form: ", error);
     }
   };
-  
+
   const location = useLocation();
 
   const isVisitorVisa = location.pathname === '/visitor';
@@ -157,18 +157,42 @@ const handleSelect2 = (e) => {
     setShowCourse(event.target.checked);
     setFormData({ ...formData, interested_in_coaching: event.target.checked });
   };
+  // data-background img start
+  const [background6, setBackground6] = useState("");
+
+  useEffect(() => {
+    const backgroundUrl6 = "/assets/pic/breadcrumb-bg.jpg";
+    setBackground6(backgroundUrl6);
+  }, []);
 
   return (
     <div>
       <Navbar />
       {/* <!-- breadcrumb start --> */}
       <section
-        className="breadcrumb pos-rel bg_img"
-        style={{ backgroundImage: `url(${background})` }}
-      >
-        <div className="container">
-          <div className="breadcrumb__content">
-            <h2 className="breadcrumb__title">Contact Us</h2>
+  className="breadcrumb pos-rel bg_img"
+  style={{ 
+    backgroundImage: `url(${background6})`, 
+    minHeight: '400px',
+    position: 'relative',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center'
+  }}
+>
+  {/* Overlay */}
+  <div style={{
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)', // black overlay with 50% opacity
+    zIndex: 1
+  }}></div>
+
+  <div className="container" style={{ position: 'relative', zIndex: 2 }}>
+    <div className="breadcrumb__content">
+    <h2 className="breadcrumb__title" style={{color:'#fff'}}>Contact Us</h2>
             <ul className="breadcrumb__list clearfix">
               <li className="breadcrumb-item">
                 <a href="/">Home</a>
@@ -176,8 +200,10 @@ const handleSelect2 = (e) => {
 
               <li className="breadcrumb-item">Contact Us</li>
             </ul>
-          </div>
-        </div>
+    </div>
+  </div>
+      
+  
         <div className="breadcrumb__circle">
           <span
             className="big"
@@ -215,12 +241,12 @@ const handleSelect2 = (e) => {
                 <div className="xb-item--inner" style={{ boxShadow: "none" }}>
                   <div className="xb-item--holder mb-25">
                     <span>
-                      <img src="assets/img/icon/n_pad.svg" alt="" />
+                      <img src="assets/img/icon/n_pad.svg" alt="" className="orange-icon"/>
                       Contact Us
                     </span>
                     {/* <h3>Do you have questions or went more <br/> information?</h3> */}
                   </div>
-                  <form  onSubmit={handleSubmit} className="xb-item--form contact-from" action="https://sitsoftwares.co.in/go_foren/visa-inquiry/" encType="multipart/form-data" method="post">
+                  <form onSubmit={handleSubmit} className="xb-item--form contact-from" action="https://sitsoftwares.co.in/go_foren/visa-inquiry/" encType="multipart/form-data" method="post">
                     <div className="row">
                       <div className="col-lg-6">
                         <label htmlFor="">Name :</label>
@@ -229,9 +255,9 @@ const handleSelect2 = (e) => {
                             <img src="assets/img/icon/c_user.svg" alt="" />
                           </span>
                           <input type="text" name="name" placeholder="Enter your Name" onChange={(e) =>
-    setFormData({ ...formData, name: e.target.value })
-  }
-/>
+                            setFormData({ ...formData, name: e.target.value })
+                          }
+                          />
                         </div>
                       </div>
                       <div className="col-lg-6">
@@ -241,9 +267,9 @@ const handleSelect2 = (e) => {
                             <img src="assets/img/icon/c_mail.svg" alt="" />
                           </span>
                           <input type="text" onChange={(e) =>
-    setFormData({ ...formData, email: e.target.value })
-  }
- name="email" placeholder="Enter Your Email" />
+                            setFormData({ ...formData, email: e.target.value })
+                          }
+                            name="email" placeholder="Enter Your Email" />
                         </div>
                       </div>
                       <div className="col-lg-6">
@@ -252,43 +278,43 @@ const handleSelect2 = (e) => {
                           <span>
                             <img src="assets/img/icon/c_call.svg" alt="" />
                           </span>
-                          <input type="text"  name="number" onChange={(e) =>
-    setFormData({ ...formData, number: e.target.value })
-  }
- placeholder="Enter Your Number" />
+                          <input type="text" name="number" onChange={(e) =>
+                            setFormData({ ...formData, number: e.target.value })
+                          }
+                            placeholder="Enter Your Number" />
                         </div>
                       </div>
 
 
-    <div className="col-md-6">
-      <label className="form-label">Desired Country</label>
-    <select onChange={handleSelect2} name="desired_country" className="form-select" style={custom_input}>
-        <option value="">Select a Country...</option>
-        {countries.map((country) => (
-          <option key={country.id} value={country.country}>
-            {country.country}
-          </option>
-        ))}
-      </select>
-    </div>
+                      <div className="col-md-6">
+                        <label className="form-label">Desired Country</label>
+                        <select onChange={handleSelect2} name="desired_country" className="form-select" style={custom_input}>
+                          <option value="">Select a Country...</option>
+                          {countries.map((country) => (
+                            <option key={country.id} value={country.country}>
+                              {country.country}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
 
- <div className="col-md-6">
-  <label className="form-label">Desired Visa Route</label>
-  <select
-    name="desired_visa_service"
-    className="form-control"
-    style={custom_input}
-    onChange={handleSelect2}
-    required
-  >
-    <option value="">-- Select Visa Route --</option>
-    {VisaTypes.map((visa) => (
-      <option key={visa.id} value={visa.visa_type}>
-        {visa.visa_type}
-      </option>
-    ))}
-  </select>
-</div>
+                      <div className="col-md-6">
+                        <label className="form-label">Desired Visa Route</label>
+                        <select
+                          name="desired_visa_service"
+                          className="form-control"
+                          style={custom_input}
+                          onChange={handleSelect2}
+                          required
+                        >
+                          <option value="">-- Select Visa Route --</option>
+                          {VisaTypes.map((visa) => (
+                            <option key={visa.id} value={visa.visa_type}>
+                              {visa.visa_type}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
 
 
                       <div className="col-lg-6">
@@ -298,7 +324,7 @@ const handleSelect2 = (e) => {
                             <img src="assets/img/icon/c_upload.svg" alt="" />
                           </span>
                           <input onChange={(e) => setFormData({ ...formData, resume: e.target.files[0] })}
-                          name = "resume"
+                            name="resume"
                             type="file"
                             accept=".pdf,.doc,.docx"
                             id="resumeUpload"
@@ -319,7 +345,7 @@ const handleSelect2 = (e) => {
                               <FormControlLabel
                                 control={
                                   <Switch
-                                  name="interested_in_coaching"
+                                    name="interested_in_coaching"
                                     checked={showCourse}
                                     onChange={handleSwitchChange}
                                     color="primary"
@@ -340,32 +366,32 @@ const handleSelect2 = (e) => {
                               </label>
 
                               <div className="xb-item--field">
-                                <span>
+                                {/* <span>
                                   <img
                                     src="assets/img/icon/c_select.svg"
                                     alt=""
                                   />
-                                </span>
-                                <div className="col-lg-6">
-  <label htmlFor="selectCourse">Select Course :</label>
-  <div className="xb-item--field">
-    <span>
-      <img src="assets/img/icon/c_select.svg" alt="" />
-    </span>
-    <select id="selectCourse" name="course" className="form-control" onChange={(e) =>
-    setFormData({ ...formData, course: e.target.value })
-  }
->
-      <option value="">Select Course</option>
-      <option value="IELTS">IELTS</option>
-      <option value="TOEFL IBT">TOEFL IBT</option>
-      <option value="GRE">GRE</option>
-      <option value="PTE">PTE</option>
-      <option value="SAT">SAT</option>
-      <option value="Other">Other</option>
-    </select>
-  </div>
-</div>
+                                </span> */}
+                                <div >
+                                  {/* <label htmlFor="selectCourse">Select Course :</label> */}
+                                  <div className="xb-item--field">
+                                    {/* <span>
+                                      <img src="assets/img/icon/c_select.svg" alt="" />
+                                    </span> */}
+                                    <select id="selectCourse" name="course" className="form-control" onChange={(e) =>
+                                      setFormData({ ...formData, course: e.target.value })
+                                    }
+                                    >
+                                      <option value="">Select Course</option>
+                                      <option value="IELTS">IELTS</option>
+                                      <option value="TOEFL IBT">TOEFL IBT</option>
+                                      <option value="GRE">GRE</option>
+                                      <option value="PTE">PTE</option>
+                                      <option value="SAT">SAT</option>
+                                      <option value="Other">Other</option>
+                                    </select>
+                                  </div>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -378,8 +404,8 @@ const handleSelect2 = (e) => {
                             <img src="assets/img/icon/c_message.svg" alt="" />
                           </span>
                           <textarea onChange={(e) =>
-    setFormData({ ...formData, message: e.target.value })
-  }
+                            setFormData({ ...formData, message: e.target.value })
+                          }
 
                             name="message"
                             id="message"
@@ -421,7 +447,8 @@ const handleSelect2 = (e) => {
                             name="captcha_entered"
                             placeholder="Enter Captcha"
                             value={captchaInput}
-                            onChange={(e) => {setCaptchaInput(e.target.value);
+                            onChange={(e) => {
+                              setCaptchaInput(e.target.value);
                               setFormData({ ...formData, captcha_entered: e.target.value });
                             }}
                             required
@@ -503,22 +530,22 @@ const handleSelect2 = (e) => {
       {/* new page start  */}
       <div className="contact-page">
 
-{/* ✅ Common Contact Page Content */}
-{/* <h2>Contact Us</h2> */}
-{/* ... your form or contact info ... */}
+        {/* ✅ Common Contact Page Content */}
+        {/* <h2>Contact Us</h2> */}
+        {/* ... your form or contact info ... */}
 
-{/* ✅ Show alert only for visitor or investor */}
-{(isVisitorVisa || isInvestorVisa) && (
-  <div className="container">
-    <div className="alert alert-warning">
-      <i className="fa fa-info-circle"></i>&nbsp;
-      Visitor Visa / Investor Visa does not require detailed assessment.
-      Please fill up the below form and we will guide on proceeding further.
-    </div>
-  </div>
-)}
+        {/* ✅ Show alert only for visitor or investor */}
+        {(isVisitorVisa || isInvestorVisa) && (
+          <div className="container">
+            <div className="alert alert-warning">
+              <i className="fa fa-info-circle"></i>&nbsp;
+              Visitor Visa / Investor Visa does not require detailed assessment.
+              Please fill up the below form and we will guide on proceeding further.
+            </div>
+          </div>
+        )}
 
-</div>
+      </div>
       {/* new page end */}
 
       <Footer />

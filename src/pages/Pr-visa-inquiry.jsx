@@ -3046,7 +3046,7 @@ export default function Prvisainquiry() {
               )}
               {/* Additional Details end */}
       
-                      <div className="container py-5">
+                      {/* <div className="container py-5">
           <div className="xb-contact pos-rel bg-white shadow rounded p-4" style={{ overflow: "visible" }}>
             <div className="row">
               <div className="col-12">
@@ -3060,7 +3060,7 @@ export default function Prvisainquiry() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
             </section>
             {/* <!-- contact end --> */}

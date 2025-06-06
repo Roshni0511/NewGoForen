@@ -10,7 +10,17 @@ function useQuery() {
 }
  
 export default function StayInformedDetails() {
+   const [isMobile, setIsMobile] = useState(window.innerWidth < 576);
   
+    useEffect(() => {
+  
+      const handleResize = () => {
+        setIsMobile(window.innerWidth < 576);
+      };
+  
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }, []);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -214,6 +224,10 @@ export default function StayInformedDetails() {
                         src={getDriveImageUrl(course.image_id)}
                         alt="blog"
                         className="img-fluid"
+                        style={{
+                        width: '100%',
+                        height: window.innerWidth < 576 ? 'auto' : '393px'
+                      }}
                       />
                     )}
                   </div>

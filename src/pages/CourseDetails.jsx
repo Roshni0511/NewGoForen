@@ -15,7 +15,17 @@ function useQuery() {
 
 const CourseDetails = () => {
 
+ const [isMobile, setIsMobile] = useState(window.innerWidth < 576);
 
+  useEffect(() => {
+
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 576);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   const [Courses, setCourses] = useState([]);
 
   useEffect(() => {
@@ -123,10 +133,12 @@ const CourseDetails = () => {
                 <div className="widget">
                   <ul className="widget-category list-unstyled">
                     {Courses.map((item) => (
-<li key={item.id}><a href={`/Course-details?id=${item.id}`}>{item.course_name}<span><img src="assets/img/icon/arrow_up.svg" /></span></a></li>
+                      <li key={item.id}><a href={`/Course-details?id=${item.id}`}>{item.course_name}<span>
+                        <img src="assets/img/icon/arrow_up.svg" /></span></a>
+                        </li>
 
-                            ))}
-{/* 
+                    ))}
+                    {/* 
                     <li><a className="active" href="/IELTS">IELTS<span><img src="assets/img/icon/arrow_up.svg" /></span></a></li>
                     <li><a href="/TOEFLIBT">TOEFL IBT<span><img src="assets/img/icon/arrow_up.svg" /></span></a></li>
                     <li><a href="/GRE">GRE<span><img src="assets/img/icon/arrow_up.svg" /></span></a></li>
@@ -138,7 +150,7 @@ const CourseDetails = () => {
                 <div className="widget widget-banner text-center bg_img" style={{ backgroundImage: `url(${background1})` }}>
                   <img className="mb-40" src="assets/img/icon/b_icon.png" />
                   <h4>Assured Approval – <br /> Guaranteed</h4>
-                  <a className="thm-btn" href="">Get in Touch</a>
+                  <a className="thm-btn" href="/Contact">Get in Touch</a>
                 </div>
               </div>
             </div>
@@ -149,9 +161,13 @@ const CourseDetails = () => {
                 <h3>{course_name}</h3>
                 <div dangerouslySetInnerHTML={{ __html: description }} />
                 <div className="single-img mt-35 mb-70">
-                  <img src={googleDrivePreviewUrl} alt={course_name} />
+                  <img src={googleDrivePreviewUrl} alt={course_name} style={{
+                        width: '100%',
+                        height: window.innerWidth < 576 ? 'auto' : '393px'
+                      }}/>
                 </div>
 
+              
                 <h3>Why choose us?</h3>
                 <div className="single-content__feature ul_li">
                   {[
@@ -183,13 +199,64 @@ const CourseDetails = () => {
                     <img src="/assets/pic/benefit (1).jpeg" alt="" />
                   </div>
                   <div className="col-lg-6 mt-30">
-                    <ul className="single-content-list list-unstyled pl-25">
-                      <li><img src="assets/img/icon/star.svg" alt="" />Top-tier Interactive Online Readiness</li>
-                      <li><img src="assets/img/icon/star.svg" alt="" />Customized Study Plans</li>
-                      <li><img src="assets/img/icon/star.svg" alt="" />Skill Building Sessions</li>
-                      <li><img src="assets/img/icon/star.svg" alt="" />Full Length Mock Test</li>
-                      <li><img src="assets/img/icon/star.svg" alt="" />Test Evaluations By Experts</li>
+                     <ul class="single-content-list list-unstyled pl-25">
+                      <li><div className="xb-item--ratting" style={{ marginRight: '10px' }}>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="#e38508"
+                        >
+                          <path d="M12 .587l3.668 7.568L24 9.75l-6 5.852L19.336 24 12 19.896 4.664 24 6 15.602 0 9.75l8.332-1.595z" />
+                        </svg>
+                      </div>Top-tier Interactive Online Readiness</li>
+                      <li><div className="xb-item--ratting" style={{ marginRight: '10px' }}>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="#e38508"
+                        >
+                          <path d="M12 .587l3.668 7.568L24 9.75l-6 5.852L19.336 24 12 19.896 4.664 24 6 15.602 0 9.75l8.332-1.595z" />
+                        </svg>
+                      </div>Customized Study Plans</li>
+                      <li><div className="xb-item--ratting" style={{ marginRight: '10px' }}>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="#e38508"
+                        >
+                          <path d="M12 .587l3.668 7.568L24 9.75l-6 5.852L19.336 24 12 19.896 4.664 24 6 15.602 0 9.75l8.332-1.595z" />
+                        </svg>
+                      </div>Skill Building Sessions</li>
+                      <li><div className="xb-item--ratting" style={{ marginRight: '10px' }}>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="#e38508"
+                        >
+                          <path d="M12 .587l3.668 7.568L24 9.75l-6 5.852L19.336 24 12 19.896 4.664 24 6 15.602 0 9.75l8.332-1.595z" />
+                        </svg>
+                      </div>Full Length Mock Test</li>
+                      <li><div className="xb-item--ratting" style={{ marginRight: '10px' }}>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="#e38508"
+                        >
+                          <path d="M12 .587l3.668 7.568L24 9.75l-6 5.852L19.336 24 12 19.896 4.664 24 6 15.602 0 9.75l8.332-1.595z" />
+                        </svg>
+                      </div>Test Evaluations By Experts</li>
                     </ul>
+                    
                   </div>
                 </div>
               </div>
