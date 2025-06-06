@@ -2336,7 +2336,7 @@ const cards = [
 
     }}>
                   <div className="xb-item--img">
-                    <h1 style={{justifyContent:'center',display:'flex'}}>StayInformed</h1>
+                    <h1 style={{justifyContent:'center',display:'flex'}}>Stay Informed</h1>
                   </div>
                 
                    <div className="xb-blog">
