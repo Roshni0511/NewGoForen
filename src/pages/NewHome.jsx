@@ -6,6 +6,7 @@ import { Autoplay } from "swiper/modules";
 import SchoolIcon from "@mui/icons-material/School";
 import $ from "jquery";
 import SuccessStories from "../component/SuccessStories";
+import Vacancies from "../component/Vacancies";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
@@ -63,12 +64,12 @@ const styles = {
     right: 0,
     width: "100%",
     zIndex: 1,
-    height:"440px"
+    height:"460px"
   },
   shape7: {
     position: "absolute",
-    top: "120px",
-    right: "-17px",
+    top: "141px",
+    right: "-46px",
     width: "60%",
     zIndex: 2,
   },
@@ -3014,7 +3015,8 @@ const cards = [
 
       {/* <!-- blog end --> */}
 
-
+ {/* Vacancies start  */}
+   <Vacancies />
 {/* form start */}
 
   <section id="reg_login">
