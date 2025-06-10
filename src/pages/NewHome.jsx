@@ -26,6 +26,85 @@ import { Link } from "react-router-dom";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import axios from 'axios';
 import PersonalGuidanceForm from "./PersonalGuidanceForm";
+import { color } from "framer-motion";
+
+
+
+const styles = {
+  container: {
+  maxWidth: "1200px",
+  margin: "0 auto",
+  padding: "0 20px",
+},
+  wrapper: {
+    display: "flex",
+    width: "100%",
+    height: "50vh",
+  },
+  leftSection: {
+    flex: 1,
+  },
+  image: {
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+  },
+  rightSection: {
+    flex: 1,
+    backgroundColor: "#0c2a4d",
+    position: "relative",
+    overflow: "hidden",
+    padding: "50px",
+    color: "#fff",
+  },
+  shape6: {
+    position: "absolute",
+    bottom: 0,
+    right: 0,
+    width: "100%",
+    zIndex: 1,
+    height:"440px"
+  },
+  shape7: {
+    position: "absolute",
+    top: "120px",
+    right: "-17px",
+    width: "60%",
+    zIndex: 2,
+  },
+  content: {
+    position: "relative",
+    zIndex: 3,
+    maxWidth: "80%",
+  },
+  heading: {
+    fontSize: "32px",
+    fontWeight: "bold",
+    marginBottom: "15px",
+    color:"#fff",
+  },
+  subText: {
+    fontSize: "16px",
+    color: "#ccc",
+    marginBottom: "20px",
+  },
+  list: {
+    listStyle: "none",
+    paddingLeft: 0,
+    lineHeight: "2",
+    marginBottom: "30px",
+  },
+  button: {
+    backgroundColor: "#ff3e3e",
+    border: "none",
+    padding: "12px 25px",
+    color: "#fff",
+    fontWeight: "bold",
+    fontSize: "16px",
+    borderRadius: "5px",
+    cursor: "pointer",
+  },
+};
 
 
 function stripHtml(html) {
@@ -2711,6 +2790,57 @@ const cards = [
       </section> */}
       {/* <!-- team end --> */}
       <SuccessStories />
+
+<div style={{paddingTop:'100px'}}>
+
+
+<div style={styles.container}>
+
+        <div style={styles.wrapper}>
+      {/* Left Side Image */}
+      <div style={styles.leftSection}>
+        <img
+          src="https://fastwpdemo.com/newwp/immigo/wp-content/uploads/2022/02/destination-1.jpg"
+          alt="Traveler"
+          style={styles.image}
+        />
+      </div>
+
+      {/* Right Side Content */}
+      <div style={styles.rightSection}>
+        {/* Background Shapes */}
+        <img
+          src="https://fastwpdemo.com/newwp/immigo/wp-content/themes/immigo/assets/images/shape/shape-6.png"
+          alt="Shape 6"
+          style={styles.shape6}
+        />
+        <img
+          src="https://fastwpdemo.com/newwp/immigo/wp-content/themes/immigo/assets/images/shape/shape-7.png"
+          alt="Shape 7"
+          style={styles.shape7}
+        />
+
+        {/* Text Content */}
+        <div style={styles.content}>
+          <h2 style={styles.heading}>Shape Your Future with Overseas Opportunities</h2>
+          <p style={styles.subText}>
+           Unlock global career possibilities with the right visa.
+          </p>
+          <ul style={styles.list}>
+            <li>✅ Entering & Leaving From Country</li>
+            <li>✅ Visas</li>
+            <li>✅ Country Citizenship</li>
+          </ul>
+        <a href="/Career">
+         <button style={styles.button} >Career →</button>
+        </a>
+         
+        </div>
+      </div>
+    </div>
+</div>
+</div>
+
       {/* <!-- faq start --> */}
     <section className="faq pt-120 pb-120">
       <div className="container">
