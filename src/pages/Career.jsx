@@ -87,18 +87,13 @@ export const Career = () => {
     </select>
 
     {/* <!-- 2. Type of Industry --> */}
-    <select>
-      <option disabled selected>Select Industry Type</option>
-      <option>IT</option>
-      <option>Healthcare</option>
-      <option>Construction</option>
-    </select>
+       <input type="text" placeholder="Faculty Of Study" className='Job_Positionv' />
 
     {/* <!-- 3. Job Position with Details --> */}
-    <input type="text" placeholder="Job Position & Details" className='Job_Positionv' />
+    <input type="text" placeholder="Study" className='Job_Positionv' />
 
     {/* <!-- 4. Master Agent Code --> */}
-    <input type="number" placeholder="Master Agent - Code" />
+     <input type="text" placeholder="Nature Of Collages" className='Job_Positionv' />
 
     <button class="submit-btnv">Submit</button>
     <button class="reset-btnv">Reset</button>

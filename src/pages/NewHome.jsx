@@ -2801,7 +2801,7 @@ const cards = [
       {/* Left Side Image */}
       <div style={styles.leftSection}>
         <img
-          src="https://fastwpdemo.com/newwp/immigo/wp-content/uploads/2022/02/destination-1.jpg"
+          src="/assets/pic/career1.jpg"
           alt="Traveler"
           style={styles.image}
         />
@@ -2811,12 +2811,12 @@ const cards = [
       <div style={styles.rightSection}>
         {/* Background Shapes */}
         <img
-          src="https://fastwpdemo.com/newwp/immigo/wp-content/themes/immigo/assets/images/shape/shape-6.png"
+          src="/assets/pic/career2.png"
           alt="Shape 6"
           style={styles.shape6}
         />
         <img
-          src="https://fastwpdemo.com/newwp/immigo/wp-content/themes/immigo/assets/images/shape/shape-7.png"
+          src="/assets/pic/career3.png"
           alt="Shape 7"
           style={styles.shape7}
         />
