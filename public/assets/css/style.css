@@ -1305,3 +1305,164 @@ background-color:"rgb(237, 243, 245)" ;
     height: 50px;
   }
 }
+
+
+/*  */
+
+.vacancy-formv {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      align-items: center;
+      /* justify-content: space-between; */
+      margin-bottom: 20px;
+      margin-top: 20px;
+    }
+
+    .vacancy-formv input[type="text"],
+    .vacancy-formv input[type="number"],
+    .vacancy-formv select {
+      padding: 10px 14px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      background-color: white;
+      color: #374151;
+      font-size: 14px;
+      min-width: 260px;
+    }
+
+    .vacancy-formv select {
+      appearance: none;
+      background-image: url('data:image/svg+xml;utf8,<svg fill="%23778" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      background-size: 14px;
+      padding-right: 30px;
+    }
+
+    .vacancy-formv button {
+      padding: 10px 16px;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .vacancy-formv .submit-btnv {
+      background-color: #fef3c7;
+      color: #d97706;
+    }
+.Job_Positionv{
+  width: 260px !important;
+}
+    .vacancy-formv .reset-btnv {
+      background-color: #fee2e2;
+      color: #dc2626;
+    }
+ul.job-listv {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+ul.job-listv > li.job-previewv {
+	background: #fff;
+	border: 1px solid #d7e2e9;
+	-webkit-border-radius: 0.4rem;
+	-moz-border-radius: 0.4rem;
+	border-radius: 0.4rem;
+	padding: 1.5rem 2rem;
+	margin-bottom: 1rem;
+	display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+	width: 100%;
+	-webkit-transition: all 0.3s ease 0s;
+	-moz-transition: all 0.3s ease 0s;
+	transition: all 0.3s ease 0s;
+}
+
+ul.job-listv > li.job-previewv:hover {
+	cursor: pointer;
+	-webkit-box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+	-moz-box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+	box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+}
+
+.job-titlev {
+	margin-top: 0.6rem;
+  font-weight: 700;
+}
+
+.companyv {
+	color: #96a4b1;
+  display: flex;
+  /* justify-content: space-between; */
+  list-style: none;
+}
+.companyv li{
+  font-size: 14px !important;
+  
+}
+.ej-list-subv{
+  font-size: 15px !important;
+}
+
+.job-previewv .btnv {
+	margin-top: 1.1rem;
+}
+
+.btn-applyv {
+	text-transform: uppercase;
+	font-size: 0.875rem;
+	font-weight: 800;
+	letter-spacing: 1px;
+	background-color: transparent;
+	color:  #07374d;
+	border: 2px solid #07374d;
+	padding: 0.6rem 2rem;
+	-webkit-border-radius: 2rem;
+	-moz-border-radius: 2rem;
+	border-radius: 2rem;
+}
+
+.btn-applyv:hover {
+	background-color: #f09318;
+	color:  #fff;
+	border: 2px solid #f09318;
+}
+
+@media (max-width: 575px) {
+	.job-previewv .contentv {
+		width: 100%;
+	}
+}
+
+@media only screen and (min-width: 992px) {
+	#navbar-mainv{
+		background: transparent;
+		border-bottom: 1px solid transparent;
+	}
+	
+	#navbar-mainv .navbar-brandv {
+		color: #fff;
+		opacity: 0.8;
+		padding: 0.95rem 1.2rem;
+	}
+	
+	#navbar-mainv .navbar-brandv:hover,
+	#navbar-mainv .navbar-brandv:focus {
+		opacity: 1;
+	}
+	
+	#navbar-mainv .navbar-navv > li.nav-itemv > a {
+		color: #fff;
+		opacity: 0.8;
+		padding: 0.95rem 1.2rem;
+	}
+	
+	#navbar-mainv .navbar-navv > li.nav-itemv > a:hover,
+	#navbar-mainv .navbar-navv > li.nav-itemv > a:focus {
+		opacity: 1;
+	}
+}
