@@ -87,10 +87,46 @@ export const Career = () => {
     </select>
 
     {/* <!-- 2. Type of Industry --> */}
-       <input type="text" placeholder="Faculty Of Study" className='Job_Positionv' />
+    <select className="Job_Positionv">
+  <option value="">Select Faculty of Study</option>
+  <option value="engineering">Engineering & Technology</option>
+  <option value="business">Business & Management</option>
+  <option value="cs">Computer Science & IT</option>
+  <option value="health">Health & Medical Sciences</option>
+  <option value="arts">Arts & Humanities</option>
+  <option value="law">Law</option>
+  <option value="social">Social Sciences</option>
+  <option value="education">Education & Teaching</option>
+  <option value="sciences">Sciences</option>
+  <option value="pharmacy">Pharmacy</option>
+  <option value="nursing">Nursing</option>
+  <option value="architecture">Architecture & Design</option>
+  <option value="agriculture">Agriculture & Veterinary Sciences</option>
+  <option value="hospitality">Tourism & Hospitality</option>
+  <option value="media">Media & Communication</option>
+  <option value="environment">Environmental Studies</option>
+  <option value="performing">Performing Arts</option>
+  <option value="fashion">Fashion & Interior Design</option>
+</select>
+
 
     {/* <!-- 3. Job Position with Details --> */}
-    <input type="text" placeholder="Study" className='Job_Positionv' />
+   <select className="Job_Positionv">
+  <option value="">Select Study Level</option>
+  <option value="certificate">Certificate Course</option>
+  <option value="diploma">Diploma</option>
+  <option value="adv_diploma">Advanced Diploma</option>
+  <option value="bachelors">Bachelor’s Degree</option>
+  <option value="postgrad_diploma">Postgraduate Diploma</option>
+  <option value="masters">Master’s Degree</option>
+  <option value="phd">Doctorate / PhD</option>
+  <option value="foundation">Foundation Program</option>
+  <option value="language">Language Course</option>
+  <option value="short">Short-Term Course</option>
+  <option value="exchange">Exchange Program</option>
+  <option value="online">Online / Distance Learning</option>
+</select>
+
 
     {/* <!-- 4. Master Agent Code --> */}
      <input type="text" placeholder="Nature Of Collages" className='Job_Positionv' />

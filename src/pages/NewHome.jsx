@@ -40,7 +40,7 @@ const styles = {
   wrapper: {
     display: "flex",
     width: "100%",
-    height: "50vh",
+    height: "55vh",
   },
   leftSection: {
     flex: 1,
@@ -48,7 +48,7 @@ const styles = {
   image: {
     width: "100%",
     height: "100%",
-    objectFit: "cover",
+   
   },
   rightSection: {
     flex: 1,
@@ -64,12 +64,12 @@ const styles = {
     right: 0,
     width: "100%",
     zIndex: 1,
-    height:"460px"
+    height:"480px"
   },
   shape7: {
     position: "absolute",
-    top: "141px",
-    right: "-46px",
+    top: "55px",
+    right: "-20px",
     width: "60%",
     zIndex: 2,
   },
@@ -123,7 +123,7 @@ function stripHtml(html) {
     image: "/assets/pic/banner13.png",
     title: "Begin with a Free Evaluation",
     description: "Take the first step toward your goals with a no-obligation assessment from our experts.",
-  },
+  }, 
   {
     image: "/assets/pic/banner11.png",
     title: "Get Expert Advice – No Cost!",
@@ -2795,7 +2795,7 @@ const cards = [
 <div style={{paddingTop:'100px'}}>
 
 
-<div style={styles.container}>
+
 
         <div style={styles.wrapper}>
       {/* Left Side Image */}
@@ -2839,7 +2839,7 @@ const cards = [
         </div>
       </div>
     </div>
-</div>
+
 </div>
 
       {/* <!-- faq start --> */}
