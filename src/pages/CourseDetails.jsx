@@ -29,10 +29,10 @@ const CourseDetails = () => {
 
   const query = useQuery();
   const id = query.get("id");
+  const [currentId, setCurrentId] = useState(id);
 
   const [course, setCourse] = useState(null);
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     if (id) {
       fetch(`http://localhost:8000/get_course_detail/${id}`)
@@ -123,15 +123,10 @@ const CourseDetails = () => {
                 <div className="widget">
                   <ul className="widget-category list-unstyled">
                     {Courses.map((item) => (
-<li key={item.id}><a href={`/Course-details?id=${item.id}`}>{item.course_name}<span><img src="assets/img/icon/arrow_up.svg" /></span></a></li>
+<li key={item.id}><a href={`/Course-details?id=${item.id}`} className={currentId == item.id ? 'active' : ''}>{item.course_name}<span><img src="assets/img/icon/arrow_up.svg" /></span></a></li>
 
                             ))}
-{/* 
-                    <li><a className="active" href="/IELTS">IELTS<span><img src="assets/img/icon/arrow_up.svg" /></span></a></li>
-                    <li><a href="/TOEFLIBT">TOEFL IBT<span><img src="assets/img/icon/arrow_up.svg" /></span></a></li>
-                    <li><a href="/GRE">GRE<span><img src="assets/img/icon/arrow_up.svg" /></span></a></li>
-                    <li><a href="/PTE">PTE<span><img src="assets/img/icon/arrow_up.svg" /></span></a></li>
-                    <li><a href="/SAT">SAT <span><img src="assets/img/icon/arrow_up.svg" /></span></a></li> */}
+
                   </ul>
                 </div>
 
@@ -151,6 +146,9 @@ const CourseDetails = () => {
                 <div className="single-img mt-35 mb-70">
                   <img src={googleDrivePreviewUrl} alt={course_name} />
                 </div>
+                  <div class="single-img mt-35 mb-70">
+                    <img src="/assets/pic/mainielts.jpg" />
+                  </div>
 
                 <h3>Why choose us?</h3>
                 <div className="single-content__feature ul_li">

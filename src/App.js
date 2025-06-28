@@ -49,6 +49,8 @@ import FooterHome from "./pages/FooterHome";
 import StayInformed from "./pages/StayInformed ";
 import StayInformedDetails from "./pages/StayInformedDetails";
 import CourseDetails from "./pages/CourseDetails";
+import { Career } from "./pages/Career";
+import StudyCourse from "./pages/StudyCourse";
 
 
 
@@ -225,6 +227,9 @@ function App() {
 <Route path="/StayInformedDetails" element={<StayInformedDetails />}/>
         <Route path="/Visaservice" element={<Visaservice />} />
         <Route path="/Countries" element={<Countries />} />
+        <Route path="/Career" element={<Career />}/>
+        <Route path="/StudyCourse" element={<StudyCourse />}/>
+
         <Route path="/FooterHome" element={<FooterHome />} />
       </Routes>
     </>

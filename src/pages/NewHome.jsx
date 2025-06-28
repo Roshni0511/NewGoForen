@@ -26,6 +26,7 @@ import { Link } from "react-router-dom";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import axios from 'axios';
 import PersonalGuidanceForm from "./PersonalGuidanceForm";
+import StudyCourseComponent from "../component/StudyCourseComponent";
 
 
 function stripHtml(html) {
@@ -627,9 +628,10 @@ const cards = [
       </section> 
       {/* <!-- about end --> */}
    
+ <StudyCourseComponent />
 
       {/* <!-- visa type start --> */}
-      <section className="visa type pb-135">
+      <section className="visa type pb-135 pt-100">
         <div className="container">
           <div className="service-wrap pos-rel">
             <div className="service-img-wrap">
