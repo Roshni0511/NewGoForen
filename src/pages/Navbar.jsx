@@ -273,7 +273,7 @@ export default function Navbar() {
 
                     <li className="menu-item-has-children">
                       <a href="/Courses">
-                        <span>Courses</span>
+                        <span>Courses4444</span>
                       </a>
                       <ul className="submenu">
                       {Courses.map((item) => (

@@ -1,233 +1,162 @@
-// import React from 'react'
-
-// export default function Vacancies() {
-//   return (
-//     <div>
-      
-
-// 	<section className=' pt-60 pb-60' style={{backgroundColor:'#edf3f57a'}}>
-// 		<div class="container">
-//       <h2>  Vacancies</h2>
-//   <div class="vacancy-formv">
-//     {/* <!-- 1. Country --> */}
-//     <select>
-//       <option disabled selected>Select Country</option>
-//       <option>India</option>
-//       <option>UAE</option>
-//       <option>USA</option>
-//     </select>
-
-//     {/* <!-- 2. Type of Industry --> */}
-//     <select>
-//       <option disabled selected>Select Industry Type</option>
-//       <option>IT</option>
-//       <option>Healthcare</option>
-//       <option>Construction</option>
-//     </select>
-
-//     {/* <!-- 3. Job Position with Details --> */}
-//     <input type="text" placeholder="Job Position & Details" className='Job_Positionv' />
-
-//     {/* <!-- 4. Master Agent Code --> */}
-//     <input type="number" placeholder="Master Agent - Code" />
-
-//     <button class="submit-btnv">Submit</button>
-//     <button class="reset-btnv">Reset</button>
-//   </div>
-// 			<div class="row">
-// 				<div class="col-md-12 ">
-// 					<ul class="job-listv">
-// 						<li class="job-previewv">
-// 							<div class="contentv float-leftv">
-// 								<h4 class="job-titlev">
-// 									Senior Web Designer
-// 								</h4>
-// 								{/* <h5 class="companyv">
-// 									Seattle, WA
-// 								</h5> */}
-//                 <ul class="companyv mt-2">
-//                    <li style={{marginRight:'10px',color:'#e38508'}}><i class="fas fa-building"></i> Company</li>
-//                     <li style={{color:'#07374d'}}><i class="fas fa-map-marker-alt"></i> Anywhere</li>
-//                 </ul>
-// 							</div>
-//               <div class="ej-job-list-item-col ej-job-time-col">
-//                   <p class="job-titlev">01 Jan, 2030</p>
-//                   <p class="ej-list-subv">No of vacancies:  2 </p>
-//               </div>
-// 							<a href="#" class="btnv btn-applyv float-sm-rightv float-xs-leftv">
-// 								Apply
-// 							</a>
-// 						</li>
-            
-// 						<li class="job-previewv">
-// 							<div class="contentv float-leftv">
-// 								<h4 class="job-titlev">
-// 									Front-End Engineer
-// 								</h4>
-// 								{/* <h5 class="companyv">
-// 									New York, NY
-// 								</h5> */}
-//                 <ul class="companyv mt-2">
-//                    <li style={{marginRight:'10px',color:'#e38508'}}><i class="fas fa-building"></i> Company</li>
-//                     <li style={{color:'#07374d'}}><i class="fas fa-map-marker-alt"></i> Anywhere</li>
-//                 </ul>
-// 							</div>
-//                <div class="ej-job-list-item-col ej-job-time-col">
-//                   <p class="job-titlev">01 Jan, 2030</p>
-//                   <p class="ej-list-subv">No of vacancies:  2 </p>
-//               </div>
-// 							<a href="#" class="btnv btn-applyv float-sm-rightv float-xs-leftv">
-// 								Apply
-// 							</a>
-// 						</li>
-					
-// 					</ul>
-// 				</div>
-// 			</div>
-// 		</div>
-// 	</section>
-//     </div>
-//   )
-// }
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 
 const Vacancies = () => {
+  const [countries, setCountries] = useState([]);
+  const [studyLevels, setStudyLevels] = useState([]);
+  const [studyCourses, setStudyCourses] = useState([]);
+  const [allCourses, setAllCourses] = useState([]);
+  const [studyFaculties, setStudyFaculties] = useState([]);
+
+  const [selectedCountry, setSelectedCountry] = useState("");
+  const [selectedFaculty, setSelectedFaculty] = useState("");
+  const [selectedLevel, setSelectedLevel] = useState("");
+  const [collegeNature, setCollegeNature] = useState("");
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/get_Study_Faculty_data/")
+      .then(res => res.json())
+      .then(data => setStudyFaculties(data))
+      .catch(err => console.error("Failed to load study faculties", err));
+
+    fetch("http://127.0.0.1:8000/get_country_data/")
+      .then((res) => res.json())
+      .then((data) => setCountries(data))
+      .catch((err) => console.error("Failed to load countries", err));
+
+    fetch("http://127.0.0.1:8000/get_Study_Level_data/")
+      .then((res) => res.json())
+      .then((data) => setStudyLevels(data))
+      .catch((err) => console.error("Failed to load study levels", err));
+
+    fetch("http://127.0.0.1:8000/get_Study_Cource_data/")
+      .then((res) => res.json())
+      .then((data) => {
+        setAllCourses(data);
+        setStudyCourses(data.slice(-2));
+      })
+      .catch((err) => console.error("Failed to load study courses", err));
+  }, []);
+
+  const formatDate = (isoDateStr) => {
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const date = new Date(isoDateStr);
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = months[date.getMonth()];
+    const year = date.getFullYear();
+    return `${day} ${month}, ${year}`;
+  };
+
+  const handleFilter = () => {
+    let filtered = [...allCourses];
+
+    if (selectedCountry)
+      filtered = filtered.filter(item => item.location.toLowerCase().includes(selectedCountry.toLowerCase()));
+
+    if (selectedFaculty)
+      filtered = filtered.filter(item => item.study_faculty === selectedFaculty);
+
+    if (selectedLevel)
+      filtered = filtered.filter(item => item.study_level === selectedLevel);
+
+    if (collegeNature)
+      filtered = filtered.filter(item =>
+        item.college_nature && item.college_nature.toLowerCase().includes(collegeNature.toLowerCase())
+      );
+
+    setStudyCourses(filtered);
+  };
+
+  const handleReset = () => {
+    setSelectedCountry("");
+    setSelectedFaculty("");
+    setSelectedLevel("");
+    setCollegeNature("");
+    setStudyCourses(allCourses.slice(-2));
+  };
+
   return (
     <>
-    
-       <div>
-      
+      <div>
+        <section className='pt-60 pb-60' style={{ backgroundColor: '#edf3f57a' }}>
+          <div className="container">
+            <h2>Study Course</h2>
 
-	<section className=' pt-60 pb-60' style={{backgroundColor:'#edf3f57a'}}>
-		<div class="container">
-      <h2>  Study Course</h2>
-  <div class="vacancy-formv">
-    {/* <!-- 1. Country --> */}
-    <select>
-      <option disabled selected>Select Country</option>
-      <option>India</option>
-      <option>UAE</option>
-      <option>USA</option>
-    </select>
+            <div className="vacancy-formv">
+              {/* 1. Country */}
+              <select value={selectedCountry} onChange={(e) => setSelectedCountry(e.target.value)}>
+                <option value="">Select Country</option>
+                <option value="anywhere">Anywhere</option>
+                {countries.map((c, i) => (
+                  <option key={i} value={c.country}>{c.country}</option>
+                ))}
+              </select>
 
-    {/* <!-- 2. Type of Industry --> */}
-    <select className="Job_Positionv">
-  <option value="">Select Faculty of Study</option>
-  <option value="engineering">Engineering & Technology</option>
-  <option value="business">Business & Management</option>
-  <option value="cs">Computer Science & IT</option>
-  <option value="health">Health & Medical Sciences</option>
-  <option value="arts">Arts & Humanities</option>
-  <option value="law">Law</option>
-  <option value="social">Social Sciences</option>
-  <option value="education">Education & Teaching</option>
-  <option value="sciences">Sciences</option>
-  <option value="pharmacy">Pharmacy</option>
-  <option value="nursing">Nursing</option>
-  <option value="architecture">Architecture & Design</option>
-  <option value="agriculture">Agriculture & Veterinary Sciences</option>
-  <option value="hospitality">Tourism & Hospitality</option>
-  <option value="media">Media & Communication</option>
-  <option value="environment">Environmental Studies</option>
-  <option value="performing">Performing Arts</option>
-  <option value="fashion">Fashion & Interior Design</option>
-</select>
+              {/* 2. Faculty of Study */}
+              <select className="Job_Positionv" value={selectedFaculty} onChange={(e) => setSelectedFaculty(e.target.value)}>
+                <option value="">Select Faculty of Study</option>
+                {studyFaculties.map((item) => (
+                  <option key={item.id} value={item.course_name}>{item.course_name}</option>
+                ))}
+              </select>
 
+              {/* 3. Study Level */}
+              <select className="Job_Positionv" value={selectedLevel} onChange={(e) => setSelectedLevel(e.target.value)}>
+                <option value="">Select Study Level</option>
+                {studyLevels.map((item) => (
+                  <option key={item.id} value={item.level_name}>{item.level_name}</option>
+                ))}
+              </select>
 
-    {/* <!-- 3. Job Position with Details --> */}
-   <select className="Job_Positionv">
-  <option value="">Select Study Level</option>
-  <option value="certificate">Certificate Course</option>
-  <option value="diploma">Diploma</option>
-  <option value="adv_diploma">Advanced Diploma</option>
-  <option value="bachelors">Bachelor’s Degree</option>
-  <option value="postgrad_diploma">Postgraduate Diploma</option>
-  <option value="masters">Master’s Degree</option>
-  <option value="phd">Doctorate / PhD</option>
-  <option value="foundation">Foundation Program</option>
-  <option value="language">Language Course</option>
-  <option value="short">Short-Term Course</option>
-  <option value="exchange">Exchange Program</option>
-  <option value="online">Online / Distance Learning</option>
-</select>
+              {/* 4. Nature of Colleges */}
+              <input
+                type="text"
+                placeholder="Nature Of Colleges"
+                className='Job_Positionv'
+                value={collegeNature}
+                onChange={(e) => setCollegeNature(e.target.value)}
+              />
 
+              <button className="submit-btnv" onClick={handleFilter}>Submit</button>
+              <button className="reset-btnv" onClick={handleReset}>Reset</button>
+            </div>
 
-    {/* <!-- 4. Master Agent Code --> */}
-     <input type="text" placeholder="Nature Of Collages" className='Job_Positionv' />
-
-    <button class="submit-btnv">Submit</button>
-    <button class="reset-btnv">Reset</button>
-  </div>
-			<div class="row">
-				<div class="col-md-12 ">
-					<ul class="job-listv">
-						<li class="job-previewv">
-							<div class="contentv float-leftv">
-								<h4 class="job-titlev">
-									Business & Management
-								</h4>
-								{/* <h5 class="companyv">
-									Seattle, WA
-								</h5> */}
-                <ul class="companyv mt-2">
-                   <li style={{marginRight:'10px',color:'#e38508'}}><i class="fas fa-building"></i> Company</li>
-                    <li style={{color:'#07374d'}}><i class="fas fa-map-marker-alt"></i> Anywhere</li>
+            <div className="row">
+              <div className="col-md-12 ">
+                <ul className="job-listv">
+                  {studyCourses.map((course) => (
+                    <li className="job-previewv" key={course.id}>
+                      <div className="contentv float-leftv">
+                        <h4 className="job-titlev">{course.course_name}</h4>
+                        <ul className="companyv mt-2">
+                          <li style={{ marginRight: '10px', color: '#e38508' }}>
+                            <i className="fas fa-university"></i> {course.college}
+                          </li>
+                          <li style={{ color: '#07374d' }}>
+                            <i className="fas fa-map-marker-alt"></i> {course.location}
+                          </li>
+                        </ul>
+                      </div>
+                      <div className="ej-job-list-item-col ej-job-time-col">
+                        <p className="job-titlev">{formatDate(course.add_date)}</p>
+                        <p className="ej-list-subv">No of seats: {course.seat_count}</p>
+                      </div>
+                      <a href="#" className="btnv btn-applyv float-sm-rightv float-xs-leftv">Apply</a>
+                    </li>
+                  ))}
                 </ul>
-							</div>
-              <div class="ej-job-list-item-col ej-job-time-col">
-                  <p class="job-titlev">01 Jan, 2030</p>
-                  <p class="ej-list-subv">No of vacancies:  2 </p>
               </div>
-							<a href="#" class="btnv btn-applyv float-sm-rightv float-xs-leftv">
-								Apply
-							</a>
-						</li>
-            
-						<li class="job-previewv">
-							<div class="contentv float-leftv">
-								<h4 class="job-titlev">
-							Tourism & Hospitality
-								</h4>
-								{/* <h5 class="companyv">
-									New York, NY
-								</h5> */}
-                <ul class="companyv mt-2">
-                   <li style={{marginRight:'10px',color:'#e38508'}}><i class="fas fa-building"></i> Company</li>
-                    <li style={{color:'#07374d'}}><i class="fas fa-map-marker-alt"></i> Anywhere</li>
-                </ul>
-							</div>
-               <div class="ej-job-list-item-col ej-job-time-col">
-                  <p class="job-titlev">01 Jan, 2030</p>
-                  <p class="ej-list-subv">No of vacancies:  2 </p>
-              </div>
-							<a href="#" class="btnv btn-applyv float-sm-rightv float-xs-leftv">
-								Apply
-							</a>
-						</li>
-					
-					</ul>
-				</div>
-			</div>
+            </div>
 
-         <div style={{justifyContent:'center',display:'flex',marginTop:'50px'}}>
-
-        <button
-                      style={{
-                        padding: "10px 20px",
-                        background: "#e38508",
-                        borderRadius: "10px",
-                      }}
-                    >
-                      <a style={{ color: "#fff" }} href="/StudyCourse">
-                      View More
-                      </a>
-                    </button>
-        </div>
-		</div>
-	</section>
-    </div>
+            <div style={{ justifyContent: 'center', display: 'flex', marginTop: '50px' }}>
+              <button style={{ padding: "10px 20px", background: "#e38508", borderRadius: "10px" }}>
+                <a style={{ color: "#fff" }} href="/StudyCourse">View More</a>
+              </button>
+            </div>
+          </div>
+        </section>
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default Vacancies
+export default Vacancies;
