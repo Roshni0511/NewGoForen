@@ -34,7 +34,7 @@ export default function News() {
           <article key={item.id} className="post-details"  style={{ marginBottom:"5rem", border:"1px solid gray", padding: "30px" , borderRadius:"10px" }}>
             <div className="post-thumb">
               <img style={{ width: '100%' }}
-                src={`https://drive.google.com/thumbnail?id=${item.image_id}`}
+                src={`https://lh3.googleusercontent.com/d/${item.image_id}`}
                 alt={item.heading}
               />
             </div>

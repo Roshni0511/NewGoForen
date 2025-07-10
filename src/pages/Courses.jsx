@@ -142,7 +142,12 @@ Differe ish universities.</p>
     <React.Fragment key={course.id}>
       <div className="col-lg-4 col-md-6 mt-30">
         <div className="xb-service">
-          <div className="xb-item--inner">
+          <div className="xb-item--inner"  style={{
+        backgroundImage: 'linear-gradient(135deg, rgba(214, 131, 48, 0.4), rgba(158, 63, 63, 0))',
+        padding: '20px',
+        borderRadius: '10px'
+      }}>
+                        <a href={`/Course-details?id=${course.id}`}>
             <div className={`xb-item--icon color${(index % 5) + 1} mb-50`}>
               <img src={`assets/img/icon/sv_0${(index % 5) + 1}.svg`} alt={course.course_name} />
             </div>
@@ -150,15 +155,22 @@ Differe ish universities.</p>
               <h3 className="xb-item--title mb-20">
                 <a href={`/Course-details?id=${course.id}`}>{course.course_name}</a>
               </h3>
-              <p
+              <p style={{ color: '#787B84' }}
                 dangerouslySetInnerHTML={{
                   __html: course.description.replace(/<[^>]+>/g, '').slice(0, 140) + '...',
                 }}
               />
             </div>
+            </a>
+
           </div>
         </div>
       </div>
+
+      {/* Insert a blank column after the second item (index 1) */}
+      {/* {index === 1 && (
+        <div className="col-lg-4 mt-30"></div>
+      )} */}
     </React.Fragment>
   ))}
                 

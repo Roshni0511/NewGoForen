@@ -55,10 +55,10 @@ const CourseDetails = () => {
   if (loading) return <div>Loading...</div>;
   if (!course || course.error) return <div>Course not found</div>;
 
-  const { course_name, description, image_id } = course;
+  const { course_name, description, description2, image_id } = course;
 
   const googleDrivePreviewUrl = image_id
-    ? `https://drive.google.com/thumbnail?id=${image_id}`
+    ? `https://lh3.googleusercontent.com/d/${image_id}`
     : "/assets/pic/mainielts.jpg"; // fallback
 
   return (
@@ -141,14 +141,14 @@ const CourseDetails = () => {
             {/* Main content */}
             <div className="col-lg-8">
               <div className="single-content">
-                <h3>{course_name}</h3>
+                {/* <h3>{course_name}</h3> */}
                 <div dangerouslySetInnerHTML={{ __html: description }} />
                 <div className="single-img mt-35 mb-70">
-                  <img src={googleDrivePreviewUrl} alt={course_name} />
+                  <img src={googleDrivePreviewUrl} alt={course_name} className="w-100 h-auto"/>
                 </div>
-                  <div class="single-img mt-35 mb-70">
+                  {/* <div class="single-img mt-35 mb-70">
                     <img src="/assets/pic/mainielts.jpg" />
-                  </div>
+                  </div> */}
 
                 <h3>Why choose us?</h3>
                 <div className="single-content__feature ul_li">
@@ -169,12 +169,14 @@ const CourseDetails = () => {
                   ))}
                 </div>
 
-                <h3>Our benefits</h3>
+                <div dangerouslySetInnerHTML={{ __html: description2 }} />
+
+                {/* <h3>Our benefits</h3>
                 <p>
                   Choosing the right visa agency can make a world of difference in your journey toward
                   international exploration, growth, and success. At goforen we take Here are the distinctive
                   benefits of partnering with us:
-                </p>
+                </p> */}
 
                 <div className="row align-items-center mt-10">
                   <div className="col-lg-6 mt-30">

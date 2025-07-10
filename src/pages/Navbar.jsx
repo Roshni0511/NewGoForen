@@ -258,7 +258,7 @@ export default function Navbar() {
                     </li>
                     <li className="menu-item-has-children">
                       <a href="/Visa-services">
-                        <span>Visa Services</span>
+                        <span style={{ color: 'rgb(255, 255, 255)' }}>Visa Services</span>
                       </a>
                       <ul className="submenu">
             {visaServices.map((item) => (
@@ -273,7 +273,7 @@ export default function Navbar() {
 
                     <li className="menu-item-has-children">
                       <a href="/Courses">
-                        <span>Courses4444</span>
+                      <span style={{ color: 'rgb(255, 255, 255)' }}>Courses</span>
                       </a>
                       <ul className="submenu">
                       {Courses.map((item) => (

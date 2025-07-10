@@ -73,7 +73,7 @@
                 {visa.image_id && (
                   <div className="mb-3">
                     <img
-                      src={`https://drive.google.com/thumbnail?id=${visa.image_id}`}
+                      src={`https://lh3.googleusercontent.com/d/${visa.image_id}`}
                       alt={visa.visa_type}
                       className="img-fluid rounded"
                     />

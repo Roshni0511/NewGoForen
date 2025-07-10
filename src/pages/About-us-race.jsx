@@ -160,7 +160,7 @@ export default function Aboutusrace() {
               <div className="mission__img text-lg-end">
                 <div className="inner-img d-inline-block wow skewIn" data-wow-delay="200ms">
                   <img
-                    src={`https://drive.google.com/thumbnail?id=${item.image_id}`}
+                    src={`https://lh3.googleusercontent.com/d/${item.image_id}`}
                     alt={item.heading}
                   />
                 </div>
@@ -200,7 +200,7 @@ export default function Aboutusrace() {
           <div className="xb-item--img">
             {/* Show a fallback image if needed */}
             <img
-              src={`https://drive.google.com/thumbnail?id=${member.image_id}`}
+              src={`https://lh3.googleusercontent.com/d/${member.image_id}`}
               alt={member.name}
             />
           </div>

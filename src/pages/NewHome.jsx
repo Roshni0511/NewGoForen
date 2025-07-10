@@ -74,6 +74,84 @@ export default function NewHome() {
         })
     }, [])
 
+const styles = {
+  container: {
+  maxWidth: "1200px",
+  margin: "0 auto",
+  padding: "0 20px",
+},
+  wrapper: {
+    display: "flex",
+    width: "100%",
+    height: "70vh",
+  },
+  leftSection: {
+    flex: 1,
+  },
+  image: {
+    width: "100%",
+    height: "100%",
+   
+  },
+  rightSection: {
+    flex: 1,
+    backgroundColor: "#0c2a4d",
+    position: "relative",
+    overflow: "hidden",
+    padding: "50px",
+    color: "#fff",
+  },
+  shape6: {
+    position: "absolute",
+    bottom: 0,
+    right: 0,
+    width: "100%",
+    zIndex: 1,
+    height:"630px"
+  },
+  shape7: {
+    position: "absolute",
+    top: "170px",
+    right: "-20px",
+    width: "60%",
+    zIndex: 2,
+  },
+  content: {
+    position: "relative",
+    zIndex: 3,
+    maxWidth: "80%",
+  },
+  heading: {
+    fontSize: "32px",
+    fontWeight: "bold",
+    marginBottom: "15px",
+    color:"#fff",
+  },
+  subText: {
+    fontSize: "16px",
+    color: "#ccc",
+    marginBottom: "20px",
+  },
+  list: {
+    listStyle: "none",
+    paddingLeft: 0,
+    lineHeight: "2",
+    marginBottom: "30px",
+  },
+  button: {
+    backgroundColor: "#e38508",
+    border: "none",
+    padding: "12px 25px",
+    color: "#fff",
+    fontWeight: "bold",
+    fontSize: "16px",
+    borderRadius: "5px",
+    cursor: "pointer",
+  },
+  
+};
+
+
   const [Courses, setCourses] = useState([]);
 
   useEffect(() => {
@@ -2703,6 +2781,35 @@ const cards = [
       </section> */}
       {/* <!-- team end --> */}
       <SuccessStories />
+
+
+ <div style={{ paddingTop: '100px' }}>
+  <div className="responsive-wrapper" style={styles.wrapper}>
+    <div style={styles.leftSection}>
+      <img src="/assets/pic/career1.jpg" alt="Traveler" style={styles.image} />
+    </div>
+    <div className="responsive-right-section" style={styles.rightSection}>
+      <img src="/assets/pic/career2.png" alt="Shape 6" style={styles.shape6} />
+      <img src="/assets/pic/career3.png" alt="Shape 7" style={styles.shape7} />
+      <div className="responsive-content" style={styles.content}>
+        <h2 className="responsive-heading" style={styles.heading}>
+          Shape Your Future with Overseas Opportunities
+        </h2>
+        <p style={styles.subText}>Unlock global career possibilities with the right visa.</p>
+        <ul style={styles.list}>
+          <li>✅ Entering & Leaving From Country</li>
+          <li>✅ Visas</li>
+          <li>✅ Country Citizenship</li>
+        </ul>
+        <a href="/Career">
+          <button style={styles.button}>Career →</button>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
       {/* <!-- faq start --> */}
     <section className="faq pt-120 pb-120">
       <div className="container">
@@ -2791,7 +2898,7 @@ const cards = [
         {galleryData.map((item, index) => (
           <SwiperSlide key={index}>
             <img
-              src={`https://drive.google.com/thumbnail?id=${item.image_id}`}
+              src={`https://lh3.googleusercontent.com/d/${item.image_id}`}
               alt={item.image_name || `Slide ${index + 1}`}
               style={{
                 width: "300px",
@@ -2823,7 +2930,7 @@ const cards = [
         {blogData.map((blog, index) => {
           // Convert Google Drive shareable link to direct image link if needed
           let imageUrl = blog.image_id
-            ? `https://drive.google.com/thumbnail?id=${blog.image_id}`
+            ? `https://lh3.googleusercontent.com/d/${blog.image_id}`
             : "/assets/pic/img_01blog.jpg"; // fallback image
 
           return (

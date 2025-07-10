@@ -112,9 +112,9 @@ export default function StayInformed  () {
                 {blogData.map((blog) => (
                   <article className="single-post-item" key={blog.id} style={{border :"1px solid gray", borderRadius:'16px', padding:"1.5rem"}}> 
                     <div className="post-thumbnail-wrapper"  style={{width:"100%", height:"20rem", overflow:"hidden"}}>
-                      <a href={`/StayInformedDetails/${blog.id}`}>
+                      <a href={`/StayInformedDetails?id=${blog.id}`}>
                         <img style={{width:"100%"}}
-                          src={`https://drive.google.com/thumbnail?id=${blog.image_id}`}
+                          src={`https://lh3.googleusercontent.com/d/${blog.image_id}`}
                           alt={blog.heading}
                         />
                       </a>
@@ -126,7 +126,7 @@ export default function StayInformed  () {
                         <li><span className="posted-on"><i className="far fa-calendar-check"></i> {new Date(blog.created_at).toLocaleDateString()}</span></li>
                       </ul>
                       <h3 className="post-title border_effect">
-                        <a href={`/StayInformedDetails/${blog.id}`}>{blog.heading}</a>
+                        <a href={`/StayInformedDetails?id=${blog.id}`}>{blog.heading}</a>
                       </h3>
                       <div className="post-excerpt">
 <div
@@ -165,7 +165,7 @@ export default function StayInformed  () {
                       <div className="widget__post-item ul_li" key={post.id}>
                         <div className="post-thumb">
                           <a href={`/StayInformedDetails?id=${post.id}`}>
-                            <img src={`https://drive.google.com/thumbnail?id=${post.image_id}`} alt="" />
+                            <img src={`https://lh3.googleusercontent.com/d/${post.image_id}`} alt="" />
                           </a>
                         </div>
                         <div className="post-content">

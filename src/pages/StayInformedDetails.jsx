@@ -90,7 +90,7 @@ export default function StayInformedDetails() {
   }, [id]);
 
   const getDriveImageUrl = (id) =>
-    `https://drive.google.com/thumbnail?id=${id}`;
+    `https://lh3.googleusercontent.com/d/${id}`;
 
   
   const [comments, setComments] = useState([]);
@@ -512,7 +512,7 @@ export default function StayInformedDetails() {
                       <div className="widget__post-item ul_li" key={post.id}>
                         <div className="post-thumb">
                           <a href={`/StayInformedDetails?id=${post.id}`}>
-                            <img src={`https://drive.google.com/thumbnail?id=${post.image_id}`} alt="" />
+                            <img src={`https://lh3.googleusercontent.com/d/${post.image_id}`} alt="" />
                           </a>
                         </div>
                         <div className="post-content">

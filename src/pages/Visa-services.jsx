@@ -225,7 +225,7 @@ export default function Visaservices() {
           <div className="xb-item--inner">
             <div className="xb-item--icon mb-50">
               <img
-                src={`https://drive.google.com/thumbnail?id=${item.image_id}`}
+                src={`https://lh3.googleusercontent.com/d/${item.image_id}`}
                 alt={item.visa_type}
                 className="img-fluid"
               />
@@ -251,10 +251,14 @@ export default function Visaservices() {
             <div className="col-lg-10">
               <div className="about__content">
        <ul className="about-list ul_li list-unstyled">
-  {visaServices.map((service, index) => (
+                    {visaServices.map((service, index) => (
     <li key={service.id}>
       <a href={`/visa-services-detail?id=${service.id}`}>
-        <div className="xb-item--inner">
+        <div className="xb-item--inner" style={{
+        backgroundImage: 'linear-gradient(135deg, rgba(214, 131, 48, 0.4), rgba(158, 63, 63, 0))',
+        padding: '35px 20px',
+        borderRadius: '10px'
+      }}>
           <div className={`xb-item--number color-${(index % 5) + 1}`}>
             {index + 1}
           </div>

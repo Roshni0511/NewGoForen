@@ -41,7 +41,7 @@ const Gallery = () => {
   })
 
   // Get viewable image URL from Google Drive file ID
-  const getImageSrc = (image_id) => `https://drive.google.com/thumbnail?id=${image_id}`
+  const getImageSrc = (image_id) => `https://lh3.googleusercontent.com/d/${image_id}`
 
   const renderImages = (category) => (
     <div className="xb-countryes row">

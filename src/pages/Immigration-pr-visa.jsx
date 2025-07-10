@@ -284,16 +284,19 @@ export default function Immigrationprvisa() {
                 {visa.image_id && (
                   <div className="single-img mt-35 mb-70">
                     <img
-                      src={`https://drive.google.com/thumbnail?id=${visa.image_id}`}
+                      src={`https://lh3.googleusercontent.com/d/${visa.image_id}`}
                       alt={visa.visa_type}
-                      className="img-fluid rounded"
+                      className="w-100 h-auto"
                     />
+
                   </div>
                 )}
 
-                <div class="single-img mt-35 mb-70">
+                {/* <div class="single-img mt-35 mb-70">
                   <img src="/assets/pic/visa1.png" />
-                </div>
+                </div> */}
+                
+                
                 <h3>How Go Foren work</h3>
                 <ul class="about-list ul_li list-unstyled">
                   <li>

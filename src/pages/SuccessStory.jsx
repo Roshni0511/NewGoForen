@@ -86,7 +86,7 @@ const SuccessStory = () => {
                       <div className="xb-item--author-info ul_li">
                         <div className="xb-item--avatar">
                           <img
-                            src={`https://drive.google.com/thumbnail?id=${story.image_id}`}
+                            src={`https://lh3.googleusercontent.com/d/${story.image_id}`}
                             alt={story.heading}
                           />
                         </div>
