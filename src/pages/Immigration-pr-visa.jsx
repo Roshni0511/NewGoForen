@@ -21,7 +21,7 @@ export default function Immigrationprvisa() {
     const [visaServices, setVisaServices] = useState([]);
   
     useEffect(() => {
-      fetch('http://localhost:8000/get_visa_services/')
+      fetch('https://goforen.com/go_foren/get_visa_services/')
         .then((res) => res.json())
         .then((data) => {
           setVisaServices(data);
@@ -54,7 +54,7 @@ export default function Immigrationprvisa() {
   
   useEffect(() => {
     if (id) {
-      fetch(`http://localhost:8000/get_visa_service_detail/${id}`)
+      fetch(`https://goforen.com/go_foren/get_visa_service_detail/${id}`)
       .then(res => res.json())
       .then(data => {
         setVisa(data);

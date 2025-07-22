@@ -39,14 +39,14 @@ const PRVisaInquiryForm = () => {
   
     // Fetch country data
     useEffect(() => {
-      axios.get("http://localhost:8000/get_country_data/")
+      axios.get("https://goforen.com/go_foren/get_country_data/")
         .then((res) => setCountries(res.data))
         .catch((err) => console.error("Error fetching countries:", err));
     }, []);
   
     // Fetch visa data
     useEffect(() => {
-      axios.get("http://localhost:8000/get_visa_services/")
+      axios.get("https://goforen.com/go_foren/get_visa_services/")
         .then((res) => setVisaTypes(res.data))
         .catch((err) => console.error("Error fetching countries:", err));
     }, []);
@@ -103,7 +103,7 @@ const handleSelect2 = (e) => {
       submission.append('exam_details', JSON.stringify(exams));
       submission.append('test_details', JSON.stringify(tests));
 
-      const response = await axios.post('http://localhost:8000/submit-pr-visa-inquiry/', submission, {
+      const response = await axios.post('https://goforen.com/go_foren/submit-pr-visa-inquiry/', submission, {
         headers: {
           'Content-Type': 'multipart/form-data',
         }

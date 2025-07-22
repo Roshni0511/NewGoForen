@@ -17,7 +17,7 @@ const Gallery = () => {
   const [galleryData, setGalleryData] = useState([])
 
   useEffect(() => {
-    axios.get('http://localhost:8000/get_gallery_data/')
+    axios.get('https://goforen.com/go_foren/get_gallery_data/')
       .then((res) => {
         setGalleryData(res.data)
       })

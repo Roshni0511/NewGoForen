@@ -3,7 +3,18 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 
 export default function News() {
-  
+
+  const [visaServices, setVisaServices] = useState([]);
+ 
+  useEffect(() => {
+    fetch('https://goforen.com/go_foren/get_visa_services/')
+      .then((res) => res.json())
+      .then((data) => {
+        setVisaServices(data);
+      })
+      .catch((err) => console.error("Failed to fetch visa services:", err));
+  }, []);
+
           const [background12, setBackground12] = useState("");
         
           useEffect(() => {
@@ -15,7 +26,7 @@ export default function News() {
             const [items, setItems] = useState([]);
 
           useEffect(() => {
-            fetch("http://localhost:8000/get_news_data/")
+            fetch("https://goforen.com/go_foren/get_news_data/")
               .then((res) => res.json())
               .then((data) => setItems(data))
               .catch((err) => console.error("Failed to fetch news:", err));
@@ -60,7 +71,7 @@ export default function News() {
                 style={{
                   color: "#fff",
                   padding: "20px ",
-                  background: "#00cc99",
+                  background: "#e38508",
                   borderRadius: "10px",
                 }}
               >
@@ -82,7 +93,7 @@ export default function News() {
                       style={{
                         color: "#fff",
                         padding: "15px ",
-                        background: "#00cc99",
+                        background: "#e38508",
                         borderRadius: "10px",
                       }}
                     >
@@ -91,7 +102,7 @@ export default function News() {
                   </button>
                   </div>
                 </div>
-                <div className="widget">
+                {/* <div className="widget">
                   <h3 className="widget-title">Other Services</h3>
                   <ul className="widget__category list-unstyled">
                     <li>
@@ -121,7 +132,20 @@ export default function News() {
                     </li>
                    
                   </ul>
-                </div>
+                </div> */}
+<div className="widget">
+  <h3 className="widget-title">Other Services</h3>
+  <ul className="widget__category list-unstyled">
+    {visaServices.map((visa) => (
+      <li key={visa.id}>
+        <a href={`/visa-services-detail?id=${visa.id}`}>
+          <i className="far fa-arrow-up"></i> {visa.visa_type}
+        </a>
+      </li>
+    ))}
+  </ul>
+</div>
+
               </div>
             </div>
           </div>

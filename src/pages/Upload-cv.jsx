@@ -34,7 +34,7 @@ export default function Uploadcv() {
     const [VisaTypes, setVisaTypes] = useState([]);
    // Fetch visa data
     useEffect(() => {
-      axios.get("http://localhost:8000/get_visa_services/")
+      axios.get("https://goforen.com/go_foren/get_visa_services/")
         .then((res) => setVisaTypes(res.data))
         .catch((err) => console.error("Error fetching countries:", err));
     }, []);
@@ -59,7 +59,7 @@ export default function Uploadcv() {
     formData.append("captcha_entered", captchaInput);
 
     try {
-      const res = await axios.post("http://localhost:8000/submit_cv/", formData, {
+      const res = await axios.post("https://goforen.com/go_foren/submit_cv/", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

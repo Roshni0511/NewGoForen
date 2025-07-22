@@ -14,7 +14,7 @@ const StudentVisaInquiryForm = () => {
      const [occupations, setOccupations] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:8000/get_occupation_data/")
+    axios.get("https://goforen.com/go_foren/get_occupation_data/")
       .then((res) => setOccupations(res.data))
       .catch((err) => console.error("Error fetching occupations:", err));
   }, []);
@@ -24,7 +24,7 @@ const StudentVisaInquiryForm = () => {
 
   // Fetch country data
   useEffect(() => {
-    axios.get("http://localhost:8000/get_country_data/")
+    axios.get("https://goforen.com/go_foren/get_country_data/")
       .then((res) => setCountries(res.data))
       .catch((err) => console.error("Error fetching countries:", err));
   }, []);
@@ -121,7 +121,7 @@ useEffect(() => {
     formData.append('intended_study', JSON.stringify(intendedStudy));
 
     try {
-      const res = await fetch('http://127.0.0.1:8000/submit_student_visa_inquiry/', {
+      const res = await fetch('https://goforen.com/go_foren/submit_student_visa_inquiry/', {
         method: 'POST',
         body: formData
       });

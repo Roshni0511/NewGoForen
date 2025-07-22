@@ -11,7 +11,7 @@ const Footer = () => {
       const [visaServices, setVisaServices] = useState([]);
   
     useEffect(() => {
-      fetch('http://localhost:8000/get_visa_services/')
+      fetch('https://goforen.com/go_foren/get_visa_services/')
         .then((res) => res.json())
         .then((data) => {
           setVisaServices(data);
@@ -21,7 +21,7 @@ const Footer = () => {
     const [Courses, setCourses] = useState([]);
   
     useEffect(() => {
-      fetch('http://localhost:8000/get_course_data/')
+      fetch('https://goforen.com/go_foren/get_course_data/')
         .then((res) => res.json())
         .then((data) => {
           setCourses(data);

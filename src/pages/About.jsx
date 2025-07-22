@@ -16,7 +16,7 @@ export default function About() {
   const [TeamData, setTeamData] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8000/get_team_data/')
+    fetch('https://goforen.com/go_foren/get_team_data/')
       .then((res) => res.json())
       .then((data) => {
         setTeamData(data);
@@ -27,7 +27,7 @@ export default function About() {
  const [aboutData, setAboutData] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:8000/get_about_us_data/')
+    axios.get('https://goforen.com/go_foren/get_about_us_data/')
       .then((res) => {
         const filtered = res.data.filter(item => item.category === 'About Us');
         setAboutData(filtered);
@@ -153,16 +153,65 @@ export default function About() {
       {/* <!-- about end --> */}
 
   <section className="mission pt-130 pb-130">
-      <div className="container">
-        {aboutData.map((item, index) => (
-          <div className="row align-items-center flex-row-reverse mt-none-30" key={item.id}>
+  <div className="container">
+    {aboutData.map((item, index) => (
+      <div
+      style={{marginBottom:'100px'}}
+        className="row align-items-center mt-none-30"
+        key={item.id}
+      >
+        {index % 2 === 0 ? (
+          <>
+            {/* Text Left, Image Right */}
+            <div className="col-lg-6 mt-30">
+              <div className="mission__content">
+                <div className="sec-title">
+                  <h2 className="mb-20 wow skewIn">
+                    {item.heading}<br />
+                    <span
+                      style={{ fontSize: '35px' }}
+                      dangerouslySetInnerHTML={{
+                        __html:
+                          item.description.match(/<h2[^>]*>(.*?)<\/h2>/)?.[1] || '',
+                      }}
+                    />
+                  </h2>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: item.description.replace(/<h2[^>]*>.*?<\/h2>/, ''),
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
             <div className="col-lg-6 mt-30">
               <div className="mission__img text-lg-end">
-                <div className="inner-img d-inline-block wow skewIn" data-wow-delay="200ms">
+                <div
+                  className="inner-img d-inline-block wow skewIn"
+                  data-wow-delay="200ms"
+                >
                   <img
                     src={`https://lh3.googleusercontent.com/d/${item.image_id}`}
                     alt={item.heading}
-                     className="w-100 h-auto"
+                    className="w-100 h-auto"
+                  />
+                </div>
+              </div>
+            </div>
+          </>
+        ) : (
+          <>
+            {/* Image Left, Text Right */}
+            <div className="col-lg-6 mt-30">
+              <div className="mission__img text-lg-start">
+                <div
+                  className="inner-img d-inline-block wow skewIn"
+                  data-wow-delay="200ms"
+                >
+                  <img
+                    src={`https://lh3.googleusercontent.com/d/${item.image_id}`}
+                    alt={item.heading}
+                    className="w-100 h-auto"
                   />
                 </div>
               </div>
@@ -172,16 +221,29 @@ export default function About() {
                 <div className="sec-title">
                   <h2 className="mb-20 wow skewIn">
                     {item.heading}<br />
-                    <span style={{ fontSize: '35px' }} dangerouslySetInnerHTML={{ __html: item.description.match(/<h2[^>]*>(.*?)<\/h2>/)?.[1] || '' }} />
+                    <span
+                      style={{ fontSize: '35px' }}
+                      dangerouslySetInnerHTML={{
+                        __html:
+                          item.description.match(/<h2[^>]*>(.*?)<\/h2>/)?.[1] || '',
+                      }}
+                    />
                   </h2>
-                  <div dangerouslySetInnerHTML={{ __html: item.description.replace(/<h2[^>]*>.*?<\/h2>/, '') }} />
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: item.description.replace(/<h2[^>]*>.*?<\/h2>/, ''),
+                    }}
+                  />
                 </div>
               </div>
             </div>
-          </div>
-        ))}
+          </>
+        )}
       </div>
-    </section>
+    ))}
+  </div>
+</section>
+
 
         {/* <!-- team start --> */}
         <section class="team pt-120 pb-130 bg_img" style={{  backgroundImage: `url(${background1})`, }}>

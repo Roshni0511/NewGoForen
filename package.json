@@ -28,6 +28,7 @@
     "react-scripts": "5.0.1",
     "react-select": "^5.10.1",
     "string-strip-html": "^13.4.12",
+    "sweetalert2": "^11.22.2",
     "swiper": "^11.2.6",
     "vanilla-tilt": "^1.8.1",
     "web-vitals": "^2.1.4"
