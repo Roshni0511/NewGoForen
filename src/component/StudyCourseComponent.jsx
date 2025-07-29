@@ -2,6 +2,31 @@ import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 
 const Vacancies = () => {
+    const getTimeAgo = (createdAt) => {
+  const createdDate = new Date(createdAt);
+  const now = new Date();
+  const diffInSeconds = Math.floor((now - createdDate) / 1000);
+
+  if (diffInSeconds < 60) {
+    return `Added: ${diffInSeconds} seconds ago`;
+  } else if (diffInSeconds < 3600) {
+    const mins = Math.floor(diffInSeconds / 60);
+    return `Added: ${mins} min${mins > 1 ? 's' : ''} ago`;
+  } else if (diffInSeconds < 86400) {
+    const hrs = Math.floor(diffInSeconds / 3600);
+    return `Added: ${hrs} hour${hrs > 1 ? 's' : ''} ago`;
+  } else if (diffInSeconds < 2592000) {
+    const days = Math.floor(diffInSeconds / 86400);
+    return `Added: ${days} day${days > 1 ? 's' : ''} ago`;
+  } else if (diffInSeconds < 31536000) {
+    const months = Math.floor(diffInSeconds / 2592000);
+    return `Added: ${months} month${months > 1 ? 's' : ''} ago`;
+  } else {
+    const years = Math.floor(diffInSeconds / 31536000);
+    return `Added: ${years} year${years > 1 ? 's' : ''} ago`;
+  }
+};
+
   const [countries, setCountries] = useState([]);
   const [studyLevels, setStudyLevels] = useState([]);
   const [studyCourses, setStudyCourses] = useState([]);
@@ -116,15 +141,27 @@ const handleInputChange = (e) => {
   const { name, value } = e.target;
 
   if (name === "number") {
-    // Allow only digits and maximum 10 characters
-    const onlyDigits = value.replace(/\D/g, ""); // remove non-digits
+    // Remove non-digits
+    const onlyDigits = value.replace(/\D/g, "");
+
+    // Allow only up to 10 digits
     if (onlyDigits.length <= 10) {
       setApplyData((prev) => ({ ...prev, [name]: onlyDigits }));
     }
+  } else if (name === "name") {
+    // Allow only alphabets and spaces
+    if (/^[a-zA-Z\s]*$/.test(value)) {
+      setApplyData((prev) => ({ ...prev, [name]: value }));
+    }
+  } else if (name === "email") {
+    // Allow only valid email pattern while typing (optional strict typing)
+    // Or just allow and validate on submit
+    setApplyData((prev) => ({ ...prev, [name]: value }));
   } else {
     setApplyData((prev) => ({ ...prev, [name]: value }));
   }
 };
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
@@ -225,9 +262,9 @@ const handleInputChange = (e) => {
                 ))}
               </select>
 
-              <input
+              <input hidden
                 type="text"
-                placeholder="Nature Of Colleges"
+                placeholder="Name Of Colleges"
                 className="Job_Positionv"
                 value={collegeNature}
                 onChange={(e) => setCollegeNature(e.target.value)}
@@ -285,13 +322,17 @@ const handleInputChange = (e) => {
                         </a>
                       </div>
 
-                      <div className="col-md-3 col-12 d-flex justify-content-center align-items-center">
+<div className="col-md-3 col-12 d-flex justify-content-center align-items-center flex-column">
                         <button
                           onClick={() => handleApplyClick(course.id)}
                           className="btnv btn-applyv"
                         >
-                          Apply
+                          Inquiry
                         </button>
+                          <span className="text-muted mt-2" style={{ fontSize: '12px' }}>
+    {getTimeAgo(course.created_at)}
+  </span>
+
                       </div>
                     </li>
                   ))}
@@ -356,7 +397,7 @@ const handleInputChange = (e) => {
                 marginBottom: "20px",
               }}
             >
-              <h3 style={{ margin: 0 }}>Apply Now</h3>
+              <h3 style={{ margin: 0 }}>Inquiry Now</h3>
               <button
                 onClick={() => setShowModal(false)}
                 style={{

@@ -240,10 +240,20 @@ const handleSelect2 = (e) => {
                           <span>
                             <img src="assets/img/icon/c_user.svg" alt="" />
                           </span>
-                          <input type="text" name="name" placeholder="Enter your Name" onChange={(e) =>
-    setFormData({ ...formData, name: e.target.value })
-  }
+                          <input
+  type="text"
+  name="name"
+  placeholder="Enter your Name"
+  value={formData.name}
+  onChange={(e) => {
+    const value = e.target.value;
+    // Allow only alphabets and spaces
+    if (/^[a-zA-Z\s]*$/.test(value) || value === "") {
+      setFormData({ ...formData, name: value });
+    }
+  }}
 />
+
                         </div>
                       </div>
                       <div className="col-lg-6">
@@ -264,10 +274,20 @@ const handleSelect2 = (e) => {
                           <span>
                             <img src="assets/img/icon/c_call.svg" alt="" />
                           </span>
-                          <input type="text"  name="number" onChange={(e) =>
-    setFormData({ ...formData, number: e.target.value })
-  }
- placeholder="Enter Your Number" />
+                         <input
+  type="text"
+  name="number"
+  onChange={(e) => {
+    const value = e.target.value;
+    const onlyDigits = value.replace(/\D/g, ""); // Remove non-digits
+    if (onlyDigits.length <= 10) {
+      setFormData({ ...formData, number: onlyDigits });
+    }
+  }}
+  value={formData.number || ""}
+  placeholder="Enter Number"
+/>
+
                         </div>
                       </div>
 
@@ -345,42 +365,54 @@ const handleSelect2 = (e) => {
 
                         {/* Conditional Course Dropdown */}
                         {showCourse && (
-                          <div className="col-lg-6">
-                            <div className="xb-item--field">
-                              <label>
-                                <strong>Course*</strong>
-                              </label>
-
-                              <div className="xb-item--field">
-                                <span>
-                                  <img
-                                    src="assets/img/icon/c_select.svg"
-                                    alt=""
-                                  />
-                                </span>
-                                <div className="col-lg-6">
-  <label htmlFor="selectCourse">Select Course :</label>
+                         <div className="col-lg-6">
   <div className="xb-item--field">
-    <span>
-      <img src="assets/img/icon/c_select.svg" alt="" />
-    </span>
-    <select id="selectCourse" name="course" className="form-control" onChange={(e) =>
-    setFormData({ ...formData, course: e.target.value })
-  }
->
-      <option value="">Select Course</option>
-      <option value="IELTS">IELTS</option>
-      <option value="TOEFL IBT">TOEFL IBT</option>
-      <option value="GRE">GRE</option>
-      <option value="PTE">PTE</option>
-      <option value="SAT">SAT</option>
-      <option value="Other">Other</option>
-    </select>
+    <label>
+      <strong>Course*</strong>
+    </label>
+
+    <div
+      className="xb-item--field"
+      style={{ position: "relative", marginTop: "5px" }}
+    >
+      <span
+        style={{
+          position: "absolute",
+          left: "10px",
+          top: "50%",
+          transform: "translateY(-50%)",
+          zIndex: 1,
+          pointerEvents: "none",
+        }}
+      >
+        <img
+          src="assets/img/icon/c_select.svg"
+          alt=""
+          style={{ width: "20px", height: "20px" }}
+        />
+      </span>
+
+      <select
+        id="selectCourse"
+        name="course"
+        className="form-control"
+        style={{ paddingLeft: "40px" }}
+        onChange={(e) =>
+          setFormData({ ...formData, course: e.target.value })
+        }
+      >
+        <option value="">Select Course</option>
+        <option value="IELTS">IELTS</option>
+        <option value="TOEFL IBT">TOEFL IBT</option>
+        <option value="GRE">GRE</option>
+        <option value="PTE">PTE</option>
+        <option value="SAT">SAT</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
   </div>
 </div>
-                              </div>
-                            </div>
-                          </div>
+
                         )}
                       </div>
                       <div className="col-12">

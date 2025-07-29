@@ -173,28 +173,36 @@ const handleSelect2 = (e) => {
         ];
           const [email, setEmail] = useState("");
 
-  const handleSubscribe = async (e) => {
-    e.preventDefault();
+const handleSubscribe = async (e) => {
+  e.preventDefault();
 
-    if (!email) {
-      alert("Please enter your email address.");
-      return;
+  if (!email) {
+    alert("Please enter your email address.");
+    return;
+  }
+
+  // ✅ Email format check
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    alert("Please enter a valid email address.");
+    return;
+  }
+
+  try {
+    const response = await axios.post("https://goforen.com/go_foren/submit_newsletter/", {
+      email: email,
+    });
+
+    if (response.data.success) {
+      alert("Subscribed successfully!");
+      setEmail("");
     }
+  } catch (error) {
+    console.error("Subscription failed:", error);
+    alert("Error: " + (error.response?.data?.error || "Something went wrong"));
+  }
+};
 
-    try {
-      const response = await axios.post("https://goforen.com/go_foren/submit_newsletter/", {
-        email: email,
-      });
-
-      if (response.data.success) {
-        alert("Subscribed successfully!");
-        setEmail("");
-      }
-    } catch (error) {
-      console.error("Subscription failed:", error);
-      alert("Error: " + (error.response?.data?.error || "Something went wrong"));
-    }
-  };
 
   return (
     <div>

@@ -5,9 +5,22 @@ import MailIcon from "@mui/icons-material/Mail";
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import YouTubeIcon from '@mui/icons-material/YouTube';
+import GoogleIcon from "@mui/icons-material/Google";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 
 const FooterHome = () => {
+      const [footerData, setFooterData] = useState(null);
+  
+  useEffect(() => {
+    fetch("https://goforen.com/go_foren/get_home_data/")
+      .then((res) => res.json())
+      .then((data) => {
+        setFooterData(data); // data is already a single object
+      })
+      .catch((err) => console.error("Error fetching footer data:", err));
+  }, []);
+  
       const [visaServices, setVisaServices] = useState([]);
   
     useEffect(() => {
@@ -38,116 +51,85 @@ const FooterHome = () => {
          
           <div className="row mt-30 pb-60 justify-content-around">
             <div className="col-lg-3 mt-30 col-md-6 footer__custom-col">
-              <div className="footer__widget">
-                <h3 className="widget-title">
-                  Do you have questions or wont more information? Contact us now
-                </h3>
-                <ul className="footer__cta list-unstyled mt-50">
-                  <li className="ul_li">
-                    <span>
-                      <CallIcon style={{ color: "#787b84" }} />
-                    </span>{" "}
-                    <a href="tel:+919624819819" style={{ color: "#0f172a" }}>
-                      +91 76 00 90 90 90
-                    </a>
-                  </li>
-                  <li className="ul_li">
-                    <span>
-                      <WhatsAppIcon style={{ color: "#787b84" }} />
-                    </span>
-                    <a
-                      href="https://wa.me/918511110221"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{ color: "#0f172a" }}
-                    >
-                      +91 85 1111 0 221
-                    </a>
-                  </li>
-                  <li className="ul_li">
-                    <span>
-                      <MailIcon style={{ color: "#787b84" }} />
-                    </span>
-                    <a
-                      href="mailto:gforen@gmail.com"
-                      style={{ color: "#0f172a" }}
-                    >
-                      goforen@gmail.com
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div style={{marginTop:'20px',display:'flex'}}>
-              <a 
-  href="https://www.facebook.com/login" 
-  target="_blank" 
-  rel="noopener noreferrer" 
-  style={{ textDecoration: "none" }} // Remove underline from the link
->
-  <span 
-    style={{
-      background: '#fff',
-      width: '45px',
-      height: '45px',
-      marginRight: '10px',
-      alignItems: 'center',
-      justifyContent: 'center',
-      display: 'flex',
-      borderRadius: '50%',
-      boxShadow: 'rgba(48, 69, 75, 0.03) 0px 4px 4px',
-    }}
-  >
-    <FacebookIcon style={{ color: "#787b84" }} />
-  </span>
-</a>
+              
+              
+<div className="footer__widget">
+  <h3 className="widget-title">
+    Do you have questions or want more information? Contact us now
+  </h3>
+  <ul className="footer__cta list-unstyled mt-50">
+    {footerData?.mobile && (
+      <li className="ul_li">
+        <span>
+          <CallIcon style={{ color: "#787b84" }} />
+        </span>{" "}
+        <a href={`tel:${footerData.mobile}`} style={{ color: "#0f172a" }}>
+          {footerData.mobile}
+        </a>
+      </li>
+    )}
 
-<a 
-  href="https://www.instagram.com/accounts/login/" 
-  target="_blank" 
-  rel="noopener noreferrer" 
-  style={{ textDecoration: "none" }} // Remove underline from the link
->
-  <span 
-    style={{
-      background: '#fff',
-      width: '45px',
-      height: '45px',
-      marginRight: '10px',
-      alignItems: 'center',
-      justifyContent: 'center',
-      display: 'flex',
-      borderRadius: '50%',
-      boxShadow: 'rgba(48, 69, 75, 0.03) 0px 4px 4px',
-    }}
-  >
-    <InstagramIcon style={{ color: "#787b84" }} />
-  </span>
-</a>
+    {footerData?.whatsapp && (
+      <li className="ul_li">
+        <span>
+          <WhatsAppIcon style={{ color: "#787b84" }} />
+        </span>
+        <a
+          href={`https://wa.me/${footerData.whatsapp.replace(/\D/g, "")}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: "#0f172a" }}
+        >
+          {footerData.whatsapp}
+        </a>
+      </li>
+    )}
 
-<a 
-  href="https://accounts.google.com/ServiceLogin?service=youtube" 
-  target="_blank" 
-  rel="noopener noreferrer" 
-  style={{ textDecoration: "none" }} // Remove underline from the link
->
-  <span 
-    style={{
-      background: '#fff',
-      width: '45px',
-      height: '45px',
-      marginRight: '10px',
-      alignItems: 'center',
-      justifyContent: 'center',
-      display: 'flex',
-      borderRadius: '50%',
-      boxShadow: 'rgba(48, 69, 75, 0.03) 0px 4px 4px',
-    }}
-  >
-    <YouTubeIcon style={{ color: "#787b84" }} />
-  </span>
-</a>
+    {footerData?.email && (
+      <li className="ul_li">
+        <span>
+          <MailIcon style={{ color: "#787b84" }} />
+        </span>
+        <a
+          href={`mailto:${footerData.email}`}
+          style={{ color: "#0f172a" }}
+        >
+          {footerData.email}
+        </a>
+      </li>
+    )}
+  </ul>
+</div>
 
-              </div>
+{/* Social Icons */}
+<div style={{ marginTop: "20px", display: "flex", gap: "10px" }}>
+  {footerData?.facebook && (
+    <SocialIcon href={footerData.facebook} target="_blank" rel="noopener noreferrer">
+      <FacebookIcon style={{ color: "#787b84" }} />
+    </SocialIcon>
+  )}
+  {footerData?.insta && (
+    <SocialIcon href={footerData.insta} target="_blank" rel="noopener noreferrer">
+      <InstagramIcon style={{ color: "#787b84" }} />
+    </SocialIcon>
+  )}
+  {footerData?.g_review && (
+    <SocialIcon href={footerData.g_review} target="_blank" rel="noopener noreferrer">
+      <GoogleIcon style={{ color: "#787b84" }} />
+    </SocialIcon>
+  )}
+  {footerData?.linkedin && (
+    <SocialIcon href={footerData.linkedin} target="_blank" rel="noopener noreferrer">
+      <LinkedInIcon style={{ color: "#787b84" }} />
+    </SocialIcon>
+  )}
+  {footerData?.youtube && (
+    <SocialIcon href={footerData.youtube} target="_blank" rel="noopener noreferrer">
+      <YouTubeIcon style={{ color: "#787b84" }} />
+    </SocialIcon>
+  )}
+</div>
+
             </div>
             <div className="col-lg-3 mt-30 col-md-6 footer__custom-col">
               <div className="footer__widget">
@@ -316,5 +298,30 @@ const FooterHome = () => {
     </>
   );
 };
+const SocialIcon = ({ href, children }) => (
+  <a
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{ textDecoration: "none" }}
+  >
+    <span
+      style={{
+        background: "#fff",
+        width: "45px",
+        height: "45px",
+        marginRight: "10px",
+        alignItems: "center",
+        justifyContent: "center",
+        display: "flex",
+        borderRadius: "50%",
+        boxShadow: "rgba(48, 69, 75, 0.03) 0px 4px 4px",
+      }}
+    >
+      {children}
+    </span>
+  </a>
+);
+
 
 export default FooterHome;

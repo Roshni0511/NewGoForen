@@ -675,6 +675,22 @@ background-color:"rgb(237, 243, 245)" ;
 .swiper {
   cursor: grab;
 }
+.downloader-button{
+    position: fixed;
+  bottom: 217px; /* Distance from bottom */
+  right: 7px;  /* Distance from right */
+  background-color: #0d6efd; /* WhatsApp green */
+  border-radius: 50%;
+  padding: 8px; /* Small padding to reduce the button size */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 9999; /* Ensure it stays on top of other content */
+  transition: background-color 0.3s ease-in-out;
+  color: white;
+  font-size: 18px; 
+}
+.downloader-button:hover{
+  color: #fff;
+}
 .whatsapp-button {
   position: fixed;
   bottom: 93px; /* Distance from bottom */
@@ -688,6 +704,26 @@ background-color:"rgb(237, 243, 245)" ;
   color: white;
   font-size: 18px; 
 }
+.google-button{
+   position: fixed;
+  bottom: 156px; /* Distance from bottom */
+  right: 7px;  /* Distance from right */
+  background-color: #6c757d; /* WhatsApp green */
+  border-radius: 50%;
+  padding: 8px; /* Small padding to reduce the button size */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 9999; /* Ensure it stays on top of other content */
+  transition: background-color 0.3s ease-in-out;
+  color: white;
+  font-size: 18px; 
+}
+.google-button:hover{
+  color: #fff;
+}
+
+
+
+
 .colorcode{
   background-color: #e38508;
   color: #fff;
@@ -1484,3 +1520,15 @@ ul.job-listv > li.job-previewv:hover {
   }
 }
 
+.NEWSEL img{
+  border-radius: 100%;
+  width: 66%;
+  height: 165PX;
+}
+.part1, .part2, .part3, .part4, .part5, .part6, .part7, .part8 {
+  transition: opacity 0.4s ease;
+}
+
+.show {
+  opacity: 1;
+}

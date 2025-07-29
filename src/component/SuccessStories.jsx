@@ -75,9 +75,9 @@ export default function SuccessStories() {
                     <SwiperSlide key={story.id}>
                       <div className="xb-testimonial">
                         <div className="xb-item--inner text-center">
-                          <div className="xb-item--img">
-                            <img alt="" src="/assets/pic/logogo.png" style={{height:" 85px;"}}></img>
-                            {/* <img src={getDriveImageUrl(story.image_id)} alt={story.heading} /> */}
+                          <div className="xb-item--img NEWSEL">
+                            <img   alt=""  src={`https://lh3.googleusercontent.com/d/${story.image_id}`}  />
+                           
                           </div>
 <div
   className="xb-item--content"

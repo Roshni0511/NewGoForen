@@ -400,6 +400,11 @@ useEffect(() => {
                                 </span>
                              
                             </li> */}
+                              <li className="menu-item">
+                              <a href="/investor">
+                                <span>WP Visa </span>
+                              </a>
+                            </li>
                             <li className="menu-item">
                               <a href="/Student-visa-inquiry">
                                 <span>Student Visa</span>
@@ -420,11 +425,13 @@ useEffect(() => {
                                 <span>Investor Visa </span>
                               </a>
                             </li>
+                                <li className="menu-item">
+                            <a href="/Career">Search Job</a>
+                          </li>
                             <li className="menu-item">
-                              <a href="/investor">
-                                <span>WP Visa </span>
-                              </a>
-                            </li>
+                            <a href="/StudyCourse"> Search University </a>
+                          </li>
+                          
                           {/* </ul> */}
                         {/* </li> */}
                         {/* <li className="menu-item">
@@ -605,7 +612,9 @@ useEffect(() => {
                     <ul className="sub-menu">
                     
                    
-                    
+                        <li className="menu-item">
+                            <a href="">WP Visa </a>
+                          </li>
                           <li className="menu-item">
                             <a href="/Student-visa-inquiry">Student Visa</a>
                           </li>
@@ -618,8 +627,11 @@ useEffect(() => {
                           <li className="menu-item">
                             <a href="/investor">Investor Visa </a>
                           </li>
-                          <li className="menu-item">
-                            <a href="">WP Visa </a>
+                         <li className="menu-item">
+                            <a href="/Career">Search Job</a>
+                          </li>
+                            <li className="menu-item">
+                            <a href="/StudyCourse"> Search University </a>
                           </li>
                      
                       

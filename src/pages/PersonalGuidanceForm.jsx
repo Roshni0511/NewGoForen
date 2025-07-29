@@ -35,10 +35,30 @@ export default function PersonalGuidanceForm() {
       .catch((err) => console.error("Error fetching visa types:", err));
   }, []);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setFormData((prev) => ({ ...prev, [name]: value }));
+  // };
+
+const handleChange = (e) => {
+  const { name, value } = e.target;
+
+  if (name === "phone") {
+    // Only digits and max 10 characters
+    if (/^\d{0,10}$/.test(value)) {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
+  } else if (name === "email") {
+    // Basic allowance (HTML input type="email" already handles format)
     setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+  } else if (/^[a-zA-Z\s]*$/.test(value)) {
+    // For names: only letters and space
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  }
+};
+  
+
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();

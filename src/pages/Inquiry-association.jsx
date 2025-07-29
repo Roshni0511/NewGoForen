@@ -126,7 +126,7 @@ export default function Inquiryassociation() {
         ></div>
         <div className="container" style={{ position: "relative", zIndex: 2 }}>
           <div className="breadcrumb__content">
-            <h2 className="breadcrumb__title" style={{ color: '#fff' }}>
+            <h2 className="breadcrumb__title" style={{ color: '#fff'}}>
               Inquiry For Association with us
             </h2>
             <ul className="breadcrumb__list clearfix">
@@ -141,7 +141,7 @@ export default function Inquiryassociation() {
       {/* Cards */}
       <section className="association-section pt-120 pb-120">
         <div className="container">
-          <div className="header text-white text-center fw-bold py-3 rounded-top" style={{ background: '#00cc99' }}>
+          <div className="header text-white text-center fw-bold py-3 rounded-top" style={{ background: '#e38508' }}>
             Inquiry For Association with us
           </div>
           <div className="d-flex flex-wrap justify-content-center border rounded-bottom overflow-auto">
@@ -156,7 +156,7 @@ export default function Inquiryassociation() {
                 <div className="card-footer text-center" style={{ background: '#fff' }}>
                   <button
                     className="btn text-white px-4"
-                    style={{ background: '#00cc99' }}
+                    style={{ background: '#e38508' }}
                     onClick={() => handleShow(item.title)}
                   >
                     Inquiry

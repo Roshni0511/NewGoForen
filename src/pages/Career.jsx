@@ -4,6 +4,32 @@ import Footer from './Footer';
 import Swal from 'sweetalert2';
 
 export const Career = () => {
+
+  const getTimeAgo = (createdAt) => {
+  const createdDate = new Date(createdAt);
+  const now = new Date();
+  const diffInSeconds = Math.floor((now - createdDate) / 1000);
+
+  if (diffInSeconds < 60) {
+    return `Added: ${diffInSeconds} seconds ago`;
+  } else if (diffInSeconds < 3600) {
+    const mins = Math.floor(diffInSeconds / 60);
+    return `Added: ${mins} min${mins > 1 ? 's' : ''} ago`;
+  } else if (diffInSeconds < 86400) {
+    const hrs = Math.floor(diffInSeconds / 3600);
+    return `Added: ${hrs} hour${hrs > 1 ? 's' : ''} ago`;
+  } else if (diffInSeconds < 2592000) {
+    const days = Math.floor(diffInSeconds / 86400);
+    return `Added: ${days} day${days > 1 ? 's' : ''} ago`;
+  } else if (diffInSeconds < 31536000) {
+    const months = Math.floor(diffInSeconds / 2592000);
+    return `Added: ${months} month${months > 1 ? 's' : ''} ago`;
+  } else {
+    const years = Math.floor(diffInSeconds / 31536000);
+    return `Added: ${years} year${years > 1 ? 's' : ''} ago`;
+  }
+};
+
   const [background6, setBackground6] = useState("");
   const [vacancies, setVacancies] = useState([]);
   const [filteredVacancies, setFilteredVacancies] = useState([]);
@@ -92,17 +118,23 @@ export const Career = () => {
 const handleInputChange = (e) => {
   const { name, value } = e.target;
 
-  // For the "number" field: only digits and max 10 characters
   if (name === "number") {
+    // Only digits and max 10 characters
     const onlyDigits = value.replace(/\D/g, ""); // remove non-digits
     if (onlyDigits.length <= 10) {
       setApplyData({ ...applyData, [name]: onlyDigits });
     }
+  } else if (name === "name") {
+    // Only alphabets and spaces
+    if (/^[a-zA-Z\s]*$/.test(value)) {
+      setApplyData({ ...applyData, [name]: value });
+    }
   } else {
-    // For all other fields
+    // All other fields (email, etc.)
     setApplyData({ ...applyData, [name]: value });
   }
 };
+
   const handleFormSubmit = async (e) => {
   e.preventDefault();
 
@@ -207,7 +239,7 @@ const handleInputChange = (e) => {
               value={positionDetail}
               onChange={(e) => setPositionDetail(e.target.value)}
             />
-            <input
+            <input hidden
               type="number"
               placeholder="Master Agent - Code"
               value={masterAgentCode}
@@ -251,7 +283,7 @@ const handleInputChange = (e) => {
                       </a>
                     </p>
 </div>
- <div className="col-md-3 col-12 d-flex justify-content-center align-items-center">
+<div className="col-md-3 col-12 d-flex justify-content-center align-items-center flex-column">
                      <button
                       onClick={() => {
                         setSelectedVacancyId(job.id); // <-- Set ID here
@@ -259,9 +291,15 @@ const handleInputChange = (e) => {
                       }}
                       className="btnv btn-applyv float-sm-rightv float-xs-leftv"
                     >
-                      Apply
+                      Inquiry
                     </button>
-                    </div>
+  <span className="text-muted mt-2" style={{ fontSize: '12px' }}>
+    {getTimeAgo(job.created_at)}
+  </span>
+</div>
+
+
+
                   </li>
                 ))}
               </ul>
@@ -313,7 +351,7 @@ const handleInputChange = (e) => {
               alignItems: 'center',
               marginBottom: '20px'
             }}>
-              <h3>Apply Now</h3>
+              <h3>Inquiry Now</h3>
               <button
                 onClick={() => setShowModal(false)}
                 style={{

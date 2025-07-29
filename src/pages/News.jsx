@@ -42,7 +42,7 @@ export default function News() {
  <div className="col-lg-8">
         <div  className="blog-post-wrapper">
       {items.map((item) => (
-          <article key={item.id} className="post-details"  style={{ marginBottom:"5rem", border:"1px solid gray", padding: "30px" , borderRadius:"10px" }}>
+          <article key={item.id} className="post-details"  style={{ marginBottom:"5rem", padding: "30px" , borderRadius:"10px" }}>
             <div className="post-thumb">
               <img style={{ width: '100%' }}
                 src={`https://lh3.googleusercontent.com/d/${item.image_id}`}
