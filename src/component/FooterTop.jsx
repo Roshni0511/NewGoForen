@@ -31,12 +31,14 @@ const handleSelect2 = (e) => {
     // Fetch country data
     useEffect(() => {
       axios.get("https://goforen.com/go_foren/get_country_data/")
+      axios.get("https://goforen.com/go_foren/get_country_data/")
         .then((res) => setCountries(res.data))
         .catch((err) => console.error("Error fetching countries:", err));
     }, []);
   
     // Fetch visa data
     useEffect(() => {
+      axios.get("https://goforen.com/go_foren/get_visa_services/")
       axios.get("https://goforen.com/go_foren/get_visa_services/")
         .then((res) => setVisaTypes(res.data))
         .catch((err) => console.error("Error fetching countries:", err));
@@ -72,6 +74,7 @@ const handleSelect2 = (e) => {
     }
   
     try {
+      const response = await axios.post('https://goforen.com/go_foren/visa-inquiry/', data, {
       const response = await axios.post('https://goforen.com/go_foren/visa-inquiry/', data, {
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -173,28 +176,29 @@ const handleSelect2 = (e) => {
         ];
           const [email, setEmail] = useState("");
 
-  const handleSubscribe = async (e) => {
-    e.preventDefault();
+const handleSubscribe = async (e) => {
+  e.preventDefault();
 
-    if (!email) {
-      alert("Please enter your email address.");
-      return;
-    }
+  if (!email) {
+    alert("Please enter your email address.");
+    return;
+  }
 
     try {
       const response = await axios.post("https://goforen.com/go_foren/submit_newsletter/", {
         email: email,
       });
 
-      if (response.data.success) {
-        alert("Subscribed successfully!");
-        setEmail("");
-      }
-    } catch (error) {
-      console.error("Subscription failed:", error);
-      alert("Error: " + (error.response?.data?.error || "Something went wrong"));
+    if (response.data.success) {
+      alert("Subscribed successfully!");
+      setEmail("");
     }
-  };
+  } catch (error) {
+    console.error("Subscription failed:", error);
+    alert("Error: " + (error.response?.data?.error || "Something went wrong"));
+  }
+};
+
 
   return (
     <div>

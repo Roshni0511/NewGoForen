@@ -2,8 +2,35 @@ import React, { useEffect, useState } from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import Swal from 'sweetalert2';
+import Swal from 'sweetalert2';
 
 export const Career = () => {
+
+  const getTimeAgo = (createdAt) => {
+  const createdDate = new Date(createdAt);
+  const now = new Date();
+  const diffInSeconds = Math.floor((now - createdDate) / 1000);
+
+  if (diffInSeconds < 60) {
+    return `Added: ${diffInSeconds} seconds ago`;
+  } else if (diffInSeconds < 3600) {
+    const mins = Math.floor(diffInSeconds / 60);
+    return `Added: ${mins} min${mins > 1 ? 's' : ''} ago`;
+  } else if (diffInSeconds < 86400) {
+    const hrs = Math.floor(diffInSeconds / 3600);
+    return `Added: ${hrs} hour${hrs > 1 ? 's' : ''} ago`;
+  } else if (diffInSeconds < 2592000) {
+    const days = Math.floor(diffInSeconds / 86400);
+    return `Added: ${days} day${days > 1 ? 's' : ''} ago`;
+  } else if (diffInSeconds < 31536000) {
+    const months = Math.floor(diffInSeconds / 2592000);
+    return `Added: ${months} month${months > 1 ? 's' : ''} ago`;
+  } else {
+    const years = Math.floor(diffInSeconds / 31536000);
+    return `Added: ${years} year${years > 1 ? 's' : ''} ago`;
+  }
+};
+
   const [background6, setBackground6] = useState("");
   const [vacancies, setVacancies] = useState([]);
   const [filteredVacancies, setFilteredVacancies] = useState([]);
@@ -27,12 +54,24 @@ export const Career = () => {
       email: "",
     });
   
+  const [selectedVacancyId, setSelectedVacancyId] = useState(null);
+
+   // Modal state
+    const [showModal, setShowModal] = useState(false);
+    const [applyData, setApplyData] = useState({
+      name: "",
+      number: "",
+      email: "",
+    });
+  
   useEffect(() => {
+    fetch("https://goforen.com/go_foren/get_Industry_Type_data/")
     fetch("https://goforen.com/go_foren/get_Industry_Type_data/")
       .then(res => res.json())
       .then(data => setIndustryTypes(data))
       .catch(err => console.error("Failed to load industry types", err));
 
+    fetch("https://goforen.com/go_foren/get_career_country_data/")
     fetch("https://goforen.com/go_foren/get_career_country_data/")
       .then(res => res.json())
       .then(data => setCountries(data))
@@ -40,6 +79,7 @@ export const Career = () => {
   }, []);
 
   useEffect(() => {
+    fetch("https://goforen.com/go_foren/get_Vacancy_data/")
     fetch("https://goforen.com/go_foren/get_Vacancy_data/")
       .then((response) => response.json())
       .then((data) => {
@@ -207,7 +247,7 @@ const handleInputChange = (e) => {
               value={positionDetail}
               onChange={(e) => setPositionDetail(e.target.value)}
             />
-            <input
+            <input hidden
               type="number"
               placeholder="Master Agent - Code"
               value={masterAgentCode}
@@ -222,6 +262,10 @@ const handleInputChange = (e) => {
               <ul className="job-listv">
                 {filteredVacancies.slice(0, visibleJobs).map((job, index) => (
                   <li className="job-previewv" key={index}>
+
+                    <div className="col-md-3 col-12 d-flex flex-column justify-content-center align-items-center">
+                      <h4 className="job-titlev text-center">{job.position_name}</h4>
+                      <ul className="companyv mt-2 text-center list-unstyled">
 
                     <div className="col-md-3 col-12 d-flex flex-column justify-content-center align-items-center">
                       <h4 className="job-titlev text-center">{job.position_name}</h4>
@@ -352,6 +396,13 @@ const handleInputChange = (e) => {
       <Footer />
     </>
   );
+};
+const inputStyle = {
+  width: '100%',
+  marginBottom: '15px',
+  padding: '10px',
+  border: '1px solid #ccc',
+  borderRadius: '5px'
 };
 const inputStyle = {
   width: '100%',

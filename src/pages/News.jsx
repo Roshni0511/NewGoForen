@@ -3,7 +3,18 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 
 export default function News() {
-  
+
+  const [visaServices, setVisaServices] = useState([]);
+ 
+  useEffect(() => {
+    fetch('https://goforen.com/go_foren/get_visa_services/')
+      .then((res) => res.json())
+      .then((data) => {
+        setVisaServices(data);
+      })
+      .catch((err) => console.error("Failed to fetch visa services:", err));
+  }, []);
+
           const [background12, setBackground12] = useState("");
         
           useEffect(() => {
@@ -31,7 +42,7 @@ export default function News() {
  <div className="col-lg-8">
         <div  className="blog-post-wrapper">
       {items.map((item) => (
-          <article key={item.id} className="post-details"  style={{ marginBottom:"5rem", border:"1px solid gray", padding: "30px" , borderRadius:"10px" }}>
+          <article key={item.id} className="post-details"  style={{ marginBottom:"5rem", padding: "30px" , borderRadius:"10px" }}>
             <div className="post-thumb">
               <img style={{ width: '100%' }}
                 src={`https://lh3.googleusercontent.com/d/${item.image_id}`}
@@ -60,7 +71,7 @@ export default function News() {
                 style={{
                   color: "#fff",
                   padding: "20px ",
-                  background: "#00cc99",
+                  background: "#e38508",
                   borderRadius: "10px",
                 }}
               >
@@ -82,7 +93,7 @@ export default function News() {
                       style={{
                         color: "#fff",
                         padding: "15px ",
-                        background: "#00cc99",
+                        background: "#e38508",
                         borderRadius: "10px",
                       }}
                     >
@@ -91,7 +102,7 @@ export default function News() {
                   </button>
                   </div>
                 </div>
-                <div className="widget">
+                {/* <div className="widget">
                   <h3 className="widget-title">Other Services</h3>
                   <ul className="widget__category list-unstyled">
                     <li>
@@ -121,7 +132,20 @@ export default function News() {
                     </li>
                    
                   </ul>
-                </div>
+                </div> */}
+<div className="widget">
+  <h3 className="widget-title">Other Services</h3>
+  <ul className="widget__category list-unstyled">
+    {visaServices.map((visa) => (
+      <li key={visa.id}>
+        <a href={`/visa-services-detail?id=${visa.id}`}>
+          <i className="far fa-arrow-up"></i> {visa.visa_type}
+        </a>
+      </li>
+    ))}
+  </ul>
+</div>
+
               </div>
             </div>
           </div>

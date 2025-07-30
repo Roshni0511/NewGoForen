@@ -16,6 +16,7 @@ import Studentvisa from "./pages/Student-visa";
 import Gallary from "./pages/Gallary";
 import Videos from "./pages/Videos";
 import Contact from "./pages/Contact";
+import { FaGoogle } from "react-icons/fa"; 
 
 import Activities from "./pages/Activities";
 import Visitorvisa from "./pages/Visitor-visa";
@@ -51,14 +52,23 @@ import StayInformedDetails from "./pages/StayInformedDetails";
 import CourseDetails from "./pages/CourseDetails";
 import { Career } from "./pages/Career";
 import StudyCourse from "./pages/StudyCourse";
-
+import { FaDownload } from 'react-icons/fa';
 
 
 
 function App() {
   const [loading, setLoading] = useState(true);
   const [showScroll, setShowScroll] = useState(false);
-
+    const [footerData, setFooterData] = useState(null);
+  
+  useEffect(() => {
+    fetch("https://goforen.com/go_foren/get_home_data/")
+      .then((res) => res.json())
+      .then((data) => {
+        setFooterData(data); // data is already a single object
+      })
+      .catch((err) => console.error("Error fetching footer data:", err));
+  }, []);
   // Loading screen timeout
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -111,16 +121,39 @@ function App() {
         </button>
       </div>
       {/* back to top end  */}
+{footerData?.pdf_file && ( 
+  <a 
+  href={`https://goforen.com${footerData.pdf_file}`}
+    target="_blank" 
+    rel="noopener noreferrer"
+    className="downloader-button"
+    aria-label="Download PDF"
+  >
+    <FaDownload size={30} />
+  </a>
+)}
 
+{footerData?.g_review && ( 
+       <a 
+      href={footerData.g_review}
+      target="_blank" 
+      rel="noopener noreferrer"
+      className="google-button"
+    >
+      <FaGoogle size={30} />
+    </a>
+)}
+
+{footerData?.whatsapp && ( 
       <a 
-      href="https://wa.me/YourPhoneNumber" 
+      href={`https://wa.me/${footerData.whatsapp.replace(/\D/g, "")}`}
       target="_blank" 
       rel="noopener noreferrer"
       className="whatsapp-button"
     >
-      <FaWhatsapp size={40} />
+      <FaWhatsapp size={30} />
     </a>
-
+)}
     {/* <div> */}
         {/* phone start  */}
         {/* <a href="tel:+917600909090">

@@ -31,18 +31,40 @@ export default function PersonalGuidanceForm() {
   useEffect(() => {
     axios
       .get("https://goforen.com/go_foren/get_visa_services/")
+      .get("https://goforen.com/go_foren/get_visa_services/")
       .then((res) => setVisaTypes(res.data))
       .catch((err) => console.error("Error fetching visa types:", err));
   }, []);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setFormData((prev) => ({ ...prev, [name]: value }));
+  // };
+
+const handleChange = (e) => {
+  const { name, value } = e.target;
+
+  if (name === "phone") {
+    // Only digits and max 10 characters
+    if (/^\d{0,10}$/.test(value)) {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
+  } else if (name === "email") {
+    // Basic allowance (HTML input type="email" already handles format)
     setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+  } else if (/^[a-zA-Z\s]*$/.test(value)) {
+    // For names: only letters and space
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  }
+};
+  
+
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      const res = await axios.post("https://goforen.com/go_foren/submit_personalized_guidance/", formData);
       const res = await axios.post("https://goforen.com/go_foren/submit_personalized_guidance/", formData);
       alert("Form submitted successfully!");
       setFormData({
