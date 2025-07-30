@@ -18,7 +18,7 @@ const SuccessStory = () => {
 
   // Fetch stories on load
   useEffect(() => {
-    fetch("http://localhost:8000/get_success_stories/")
+    fetch("https://goforen.com/go_foren/get_success_stories/")
       .then(res => res.json())
       .then(data => setStories(data))
       .catch(err => console.error("Error fetching success stories:", err));

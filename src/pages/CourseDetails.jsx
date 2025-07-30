@@ -19,7 +19,7 @@ const CourseDetails = () => {
   const [Courses, setCourses] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8000/get_course_data/')
+    fetch('https://goforen.com/go_foren/get_course_data/')
       .then((res) => res.json())
       .then((data) => {
         setCourses(data);
@@ -35,7 +35,7 @@ const CourseDetails = () => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     if (id) {
-      fetch(`http://localhost:8000/get_course_detail/${id}`)
+      fetch(`https://goforen.com/go_foren/get_course_detail/${id}`)
         .then((res) => res.json())
         .then((data) => {
           setCourse(data);

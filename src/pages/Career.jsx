@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import Swal from 'sweetalert2';
 
 export const Career = () => {
   const [background6, setBackground6] = useState("");
@@ -16,21 +17,30 @@ export const Career = () => {
   const [selectedIndustry, setSelectedIndustry] = useState("");
   const [positionDetail, setPositionDetail] = useState("");
   const [masterAgentCode, setMasterAgentCode] = useState("");
+  const [selectedVacancyId, setSelectedVacancyId] = useState(null);
 
+   // Modal state
+    const [showModal, setShowModal] = useState(false);
+    const [applyData, setApplyData] = useState({
+      name: "",
+      number: "",
+      email: "",
+    });
+  
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/get_Industry_Type_data/")
+    fetch("https://goforen.com/go_foren/get_Industry_Type_data/")
       .then(res => res.json())
       .then(data => setIndustryTypes(data))
       .catch(err => console.error("Failed to load industry types", err));
 
-    fetch("http://127.0.0.1:8000/get_country_data/")
+    fetch("https://goforen.com/go_foren/get_career_country_data/")
       .then(res => res.json())
       .then(data => setCountries(data))
       .catch(err => console.error("Failed to load countries", err));
   }, []);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/get_Vacancy_data/")
+    fetch("https://goforen.com/go_foren/get_Vacancy_data/")
       .then((response) => response.json())
       .then((data) => {
         setVacancies(data);
@@ -74,6 +84,72 @@ export const Career = () => {
     setFilteredVacancies(vacancies);
     setVisibleJobs(5);
   };
+// const handleInputChange = (e) => {
+//     const { name, value } = e.target;
+//     setApplyData({ ...applyData, [name]: value });
+//   };
+
+const handleInputChange = (e) => {
+  const { name, value } = e.target;
+
+  // For the "number" field: only digits and max 10 characters
+  if (name === "number") {
+    const onlyDigits = value.replace(/\D/g, ""); // remove non-digits
+    if (onlyDigits.length <= 10) {
+      setApplyData({ ...applyData, [name]: onlyDigits });
+    }
+  } else {
+    // For all other fields
+    setApplyData({ ...applyData, [name]: value });
+  }
+};
+  const handleFormSubmit = async (e) => {
+  e.preventDefault();
+
+  const payload = {
+    vacancy_id: selectedVacancyId,
+    name: applyData.name,
+    mobile: applyData.number,
+    email: applyData.email,
+  };
+
+  try {
+    const response = await fetch("https://goforen.com/go_foren/submit_vacancy_inquiry/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      Swal.fire({
+        icon: "success",
+        title: "Application Submitted!",
+        text: "Thank you for applying. We will contact you shortly.",
+        confirmButtonColor: "#e38508"
+      });
+      setShowModal(false);
+      setApplyData({ name: "", number: "", email: "" });
+      setSelectedVacancyId(null);
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Submission Failed",
+        text: data.error || "Please try again later.",
+        confirmButtonColor: "#e38508"
+      });
+    }
+  } catch (error) {
+    console.error("Submission error:", error);
+    Swal.fire({
+      icon: "error",
+      title: "Error",
+      text: "Network error. Please try again later.",
+      confirmButtonColor: "#e38508"
+    });
+  }
+};
 
   return (
     <>
@@ -146,9 +222,10 @@ export const Career = () => {
               <ul className="job-listv">
                 {filteredVacancies.slice(0, visibleJobs).map((job, index) => (
                   <li className="job-previewv" key={index}>
-                    <div className="contentv float-leftv">
-                      <h4 className="job-titlev">{job.position_name}</h4>
-                      <ul className="companyv mt-2">
+
+                    <div className="col-md-3 col-12 d-flex flex-column justify-content-center align-items-center">
+                      <h4 className="job-titlev text-center">{job.position_name}</h4>
+                      <ul className="companyv mt-2 text-center list-unstyled">
                         <li style={{ marginRight: "10px", color: "#e38508" }}>
                           <i className="fas fa-building"></i> {job.company}
                         </li>
@@ -157,11 +234,34 @@ export const Career = () => {
                         </li>
                       </ul>
                     </div>
-                    <div className="ej-job-list-item-col ej-job-time-col">
-                      <p className="job-titlev">{formatDate(job.vacancy_date)}</p>
-                      <p className="ej-list-subv">No of vacancies: {job.vacancy_count}</p>
+
+                    <div className="col-md-3 col-12 d-flex flex-column justify-content-center align-items-center">
+                      <p className="job-titlev text-center">{formatDate(job.vacancy_date)}</p>
+                      <p className="ej-list-subv text-center">No of vacancies: {job.vacancy_count}</p>
                     </div>
-                    <a href="#" className="btnv btn-applyv float-sm-rightv float-xs-leftv">Apply</a>
+                     <div className="col-md-3 col-12 d-flex justify-content-center align-items-center">
+                    <p className="ej-list-subv">
+                      <a 
+                        href={job.company_url} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        style={{ color: '#007bff', textDecoration: 'underline' }}
+                      >
+                        Visit Company Site
+                      </a>
+                    </p>
+</div>
+ <div className="col-md-3 col-12 d-flex justify-content-center align-items-center">
+                     <button
+                      onClick={() => {
+                        setSelectedVacancyId(job.id); // <-- Set ID here
+                        setShowModal(true);
+                      }}
+                      className="btnv btn-applyv float-sm-rightv float-xs-leftv"
+                    >
+                      Apply
+                    </button>
+                    </div>
                   </li>
                 ))}
               </ul>
@@ -188,7 +288,75 @@ export const Career = () => {
           </div>
         </div>
       </section>
+       {showModal && (
+        <div style={{
+          position: 'fixed',
+          top: 0, left: 0,
+          width: '100%', height: '100%',
+          backgroundColor: 'rgba(0,0,0,0.5)',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          zIndex: 9999
+        }}>
+          <div style={{
+            backgroundColor: '#fff',
+            padding: '30px',
+            borderRadius: '10px',
+            width: '90%',
+            maxWidth: '500px',
+            position: 'relative'
+          }}>
+            <div style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              marginBottom: '20px'
+            }}>
+              <h3>Apply Now</h3>
+              <button
+                onClick={() => setShowModal(false)}
+                style={{
+                  background: 'transparent',
+                  border: 'none',
+                  fontSize: '24px',
+                  cursor: 'pointer',
+                  color: '#999'
+                }}
+              >&times;</button>
+            </div>
+            <form onSubmit={handleFormSubmit}>
+              <input type="text" name="name" placeholder="Name" value={applyData.name} onChange={handleInputChange} required style={inputStyle} />
+              <input type="text" name="number" placeholder="Number" value={applyData.number} onChange={handleInputChange} required style={inputStyle} />
+              <input type="email" name="email" placeholder="Email" value={applyData.email} onChange={handleInputChange} required style={inputStyle} />
+             
+              <div className="d-flex justify-content-center">
+                <button
+                  type="submit"
+                  style={{
+                    backgroundColor: "#e38508",
+                    color: "#fff",
+                    padding: "10px 20px",
+                    border: "none",
+                    borderRadius: "5px",
+                  }}
+                >
+                  Submit
+                </button>
+              </div>
+              
+            </form>
+          </div>
+        </div>
+      )}
       <Footer />
     </>
   );
+};
+const inputStyle = {
+  width: '100%',
+  marginBottom: '15px',
+  padding: '10px',
+  border: '1px solid #ccc',
+  borderRadius: '5px'
 };

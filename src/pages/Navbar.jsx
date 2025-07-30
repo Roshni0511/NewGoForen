@@ -6,28 +6,78 @@ import { FaTimes } from 'react-icons/fa';
 export default function Navbar() {
   
   const [visaServices, setVisaServices] = useState([]);
-
-  useEffect(() => {
-    fetch('http://localhost:8000/get_visa_services/')
-      .then((res) => res.json())
-      .then((data) => {
-        setVisaServices(data);
-      })
-      .catch((err) => console.error("Failed to fetch visa services:", err));
-  }, []);
   const [Courses, setCourses] = useState([]);
+  const [dataLoaded, setDataLoaded] = useState(false);
 
-  useEffect(() => {
-    fetch('http://localhost:8000/get_course_data/')
-      .then((res) => res.json())
-      .then((data) => {
-        setCourses(data);
-      })
-      .catch((err) => console.error("Failed to fetch Courses:", err));
-  }, []);
+  // useEffect(() => {
+  //   fetch('https://goforen.com/go_foren/get_visa_services/')
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setVisaServices(data);
+  //     })
+  //     .catch((err) => console.error("Failed to fetch visa services:", err));
+  // }, []);
+  
 
+  // useEffect(() => {
+  //   fetch('https://goforen.com/go_foren/get_course_data/')
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setCourses(data);
+  //     })
+  //     .catch((err) => console.error("Failed to fetch Courses:", err));
+  // }, []);
+// 
 
+useEffect(() => {
+  Promise.all([
+    fetch('https://goforen.com/go_foren/get_visa_services/').then((res) => res.json()),
+    fetch('https://goforen.com/go_foren/get_course_data/').then((res) => res.json())
+  ])
+    .then(([visaData, courseData]) => {
+      setVisaServices(visaData);
+      setCourses(courseData);
+      setDataLoaded(true); // ✅ mark data as ready
+    })
+    .catch((err) => {
+      console.error("Failed to fetch data:", err);
+    });
+}, []);
 
+useEffect(() => {
+  if (!dataLoaded) return;
+
+  // ✅ Clone only after data is loaded and rendered
+  if ($(".stricky").length) {
+    $(".stricky").next(".stricked-menu").remove(); // remove if already exists
+    $(".stricky")
+      .addClass("original")
+      .clone(true)
+      .insertAfter(".stricky")
+      .addClass("stricked-menu")
+      .removeClass("original");
+  }
+
+  const handleScroll = () => {
+    if ($(".stricked-menu").length) {
+      const headerScrollPos = 100;
+      const stricky = $(".stricked-menu");
+      if ($(window).scrollTop() > headerScrollPos) {
+        stricky.addClass("stricky-fixed");
+      } else {
+        stricky.removeClass("stricky-fixed");
+      }
+    }
+  };
+
+  $(window).on("scroll", handleScroll);
+
+  return () => {
+    $(window).off("scroll", handleScroll);
+  };
+}, [dataLoaded]); // 👈 depend on dataLoaded
+
+// 
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate();

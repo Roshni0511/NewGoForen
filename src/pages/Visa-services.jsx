@@ -13,7 +13,7 @@ export default function Visaservices() {
   const [visaServices, setVisaServices] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8000/get_visa_services/')
+    fetch('https://goforen.com/go_foren/get_visa_services/')
       .then((res) => res.json())
       .then((data) => {
         setVisaServices(data);

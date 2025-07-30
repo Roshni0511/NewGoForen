@@ -15,7 +15,7 @@ const Videos = () => {
   }, []);
 
   useEffect(() => {
-    fetch('http://localhost:8000/get_video_data/')
+    fetch('https://goforen.com/go_foren/get_video_data/')
       .then(res => res.json())
       .then(data => setVideos(data))
       .catch(err => console.error("Error fetching video data:", err));

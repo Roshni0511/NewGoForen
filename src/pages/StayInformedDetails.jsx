@@ -36,7 +36,7 @@ export default function StayInformedDetails() {
     };
 
     try {
-      const res = await fetch("http://127.0.0.1:8000/submit_blog_comment/", {
+      const res = await fetch("https://goforen.com/go_foren/submit_blog_comment/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -64,7 +64,7 @@ export default function StayInformedDetails() {
   const [blogData, setBlogData] = useState([]); // ✅ Declare at top level
 
   useEffect(() => {
-    fetch("http://localhost:8000/get_blog_data/")
+    fetch("https://goforen.com/go_foren/get_blog_data/")
       .then((res) => res.json())
       .then((data) => setBlogData(data))
       .catch((error) => console.error("Error fetching blog data:", error));
@@ -78,7 +78,7 @@ export default function StayInformedDetails() {
 
   useEffect(() => {
     if (id) {
-      fetch(`http://localhost:8000/get_blog_detail/${id}`)
+      fetch(`https://goforen.com/go_foren/get_blog_detail/${id}`)
         .then((res) => res.json())
         .then((data) => {
           setCourse(data);
@@ -98,7 +98,7 @@ export default function StayInformedDetails() {
   useEffect(() => {
     if (id) {
       axios
-        .get(`http://localhost:8000/get_blog_comments/${id}/`)
+        .get(`https://goforen.com/go_foren/get_blog_comments/${id}/`)
         .then((response) => {
           setComments(response.data);
         })

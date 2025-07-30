@@ -7,7 +7,7 @@ const Courses = () => {
     const [courses, setCourses] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8000/get_course_data/")
+    fetch("https://goforen.com/go_foren/get_course_data/")
       .then((res) => res.json())
       .then((data) => setCourses(data))
       .catch((err) => console.error("Failed to fetch courses:", err));

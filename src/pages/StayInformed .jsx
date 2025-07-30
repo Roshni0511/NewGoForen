@@ -32,7 +32,7 @@ export default function StayInformed  () {
   
   useEffect(() => {
     // Fetch blog data from API
-    fetch("http://localhost:8000/get_blog_data/")
+    fetch("https://goforen.com/go_foren/get_blog_data/")
       .then((res) => res.json())
       .then((data) => setBlogData(data))
       .catch((error) => console.error("Error fetching blog data:", error));
@@ -110,7 +110,7 @@ export default function StayInformed  () {
             <div className="col-lg-8">
               <div className="blog-post-wrapper">
                 {blogData.map((blog) => (
-                  <article className="single-post-item" key={blog.id} style={{border :"1px solid gray", borderRadius:'16px', padding:"1.5rem"}}> 
+                  <article className="single-post-item" key={blog.id} > 
                     <div className="post-thumbnail-wrapper"  style={{width:"100%", height:"20rem", overflow:"hidden"}}>
                       <a href={`/StayInformedDetails?id=${blog.id}`}>
                         <img style={{width:"100%"}}

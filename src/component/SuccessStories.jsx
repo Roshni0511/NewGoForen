@@ -9,7 +9,7 @@ export default function SuccessStories() {
   useEffect(() => {
     setBackground1("assets/img/bg/tm_bg.png");
 
-    fetch("http://localhost:8000/get_success_stories/")
+    fetch("https://goforen.com/go_foren/get_success_stories/")
       .then((res) => res.json())
       .then((data) => setStories(data))
       .catch((err) => console.error("Error fetching stories:", err));

@@ -23,14 +23,14 @@ export default function PersonalGuidanceForm() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/get_country_data/")
+      .get("https://goforen.com/go_foren/get_country_data/")
       .then((res) => setCountries(res.data))
       .catch((err) => console.error("Error fetching countries:", err));
   }, []);
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/get_visa_services/")
+      .get("https://goforen.com/go_foren/get_visa_services/")
       .then((res) => setVisaTypes(res.data))
       .catch((err) => console.error("Error fetching visa types:", err));
   }, []);
@@ -43,7 +43,7 @@ export default function PersonalGuidanceForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:8000/submit_personalized_guidance/", formData);
+      const res = await axios.post("https://goforen.com/go_foren/submit_personalized_guidance/", formData);
       alert("Form submitted successfully!");
       setFormData({
         firstName: "",

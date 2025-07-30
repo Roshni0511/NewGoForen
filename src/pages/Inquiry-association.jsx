@@ -61,7 +61,7 @@ export default function Inquiryassociation() {
     setBackground(bg1);
     setBackground12(bg2);
 
-    axios.get('http://127.0.0.1:8000/get_occupation_data/')
+    axios.get('https://goforen.com/go_foren/get_occupation_data/')
       .then((response) => setOccupations(response.data))
       .catch((error) => console.error("Error fetching occupation data:", error));
   }, []);
@@ -90,7 +90,7 @@ export default function Inquiryassociation() {
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post("http://127.0.0.1:8000/submit_inquiry_association/", formData);
+      const response = await axios.post("https://goforen.com/go_foren/submit_inquiry_association/", formData);
       alert(response.data.message);
       handleClose();
     } catch (error) {

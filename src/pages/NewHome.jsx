@@ -57,7 +57,7 @@ export default function NewHome() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/get_faq_data/")
+      .get("https://goforen.com/go_foren/get_faq_data/")
       .then((response) => setFaqData(response.data))
       .catch((error) => console.error("Error fetching FAQ data:", error));
   }, []);
@@ -65,7 +65,7 @@ export default function NewHome() {
     const [galleryData, setGalleryData] = useState([])
   
     useEffect(() => {
-      axios.get('http://localhost:8000/get_gallery_data/')
+      axios.get('https://goforen.com/go_foren/get_gallery_data/')
         .then((res) => {
           setGalleryData(res.data)
         })
@@ -107,7 +107,7 @@ const styles = {
     right: 0,
     width: "100%",
     zIndex: 1,
-    height:"630px"
+    height:"645px"
   },
   shape7: {
     position: "absolute",
@@ -155,7 +155,7 @@ const styles = {
   const [Courses, setCourses] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8000/get_course_data/')
+    fetch('https://goforen.com/go_foren/get_course_data/')
       .then((res) => res.json())
       .then((data) => {
         setCourses(data);
@@ -166,7 +166,7 @@ const styles = {
   const [TeamData, setTeamData] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8000/get_team_data/')
+    fetch('https://goforen.com/go_foren/get_team_data/')
       .then((res) => res.json())
       .then((data) => {
         setTeamData(data);
@@ -185,7 +185,7 @@ const styles = {
     }
 
     try {
-      const response = await axios.post("http://localhost:8000/submit_newsletter/", {
+      const response = await axios.post("https://goforen.com/go_foren/submit_newsletter/", {
         email: email,
       });
 
@@ -203,7 +203,7 @@ const styles = {
   const [visaServices, setVisaServices] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8000/get_visa_services/')
+    fetch('https://goforen.com/go_foren/get_visa_services/')
       .then((res) => res.json())
       .then((data) => {
         setVisaServices(data);
@@ -215,7 +215,7 @@ const styles = {
   useEffect(() => {
 
     // Fetch blog data from API
-    fetch("http://localhost:8000/get_blog_data/")
+    fetch("https://goforen.com/go_foren/get_blog_data/")
       .then((res) => res.json())
       .then((data) => setBlogData(data))
       .catch((error) => console.error("Error fetching blog data:", error));
@@ -225,7 +225,7 @@ const styles = {
   const [items, setItems] = useState([]);
     
   useEffect(() => {
-    fetch("http://localhost:8000/get_news_data/")
+    fetch("https://goforen.com/go_foren/get_news_data/")
       .then((res) => res.json())
       .then((data) => {
         const headings = data.map(item => item.heading);
@@ -557,7 +557,7 @@ const cards = [
 
   <a
     className="colorcode"
-    href="/Contact"
+    href="/Career"
     style={{
       background: "#f09318",
       color: "#fff",
@@ -569,12 +569,12 @@ const cards = [
       width: "200px" // optional: same width
     }}
   >
-    Quick Inquiry
+    Search Job
   </a>
 
   <a
     className="thm-btn thm-btn--white"
-    href="/Upload-cv"
+    href="/StudyCourse"
     style={{
     
       padding: "20px",
@@ -585,7 +585,7 @@ const cards = [
       width: "200px"
     }}
   >
-    Upload CV
+    Search University
   </a>
 </div>
 

@@ -15,7 +15,7 @@ export default function News() {
             const [items, setItems] = useState([]);
 
           useEffect(() => {
-            fetch("http://localhost:8000/get_news_data/")
+            fetch("https://goforen.com/go_foren/get_news_data/")
               .then((res) => res.json())
               .then((data) => setItems(data))
               .catch((err) => console.error("Failed to fetch news:", err));

@@ -3642,7 +3642,7 @@ body .mfp-wrap .mfp-container .mfp-content .mfp-close:hover::before, body .mfp-w
       font-size: 60px; } }
   @media (max-width: 767px) {
     .hero__content h1 {
-      font-size: 40px; } }
+      font-size: 20px; } }
   .hero__content h1 span {
     color: var(--color-default); }
 .hero__content p {

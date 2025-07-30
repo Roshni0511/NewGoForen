@@ -27,14 +27,14 @@ const handleSelect2 = (e) => {
   
     // Fetch country data
     useEffect(() => {
-      axios.get("http://localhost:8000/get_country_data/")
+      axios.get("https://goforen.com/go_foren/get_country_all_data/")
         .then((res) => setCountries(res.data))
         .catch((err) => console.error("Error fetching countries:", err));
     }, []);
   
     // Fetch visa data
     useEffect(() => {
-      axios.get("http://localhost:8000/get_visa_services/")
+      axios.get("https://goforen.com/go_foren/get_visa_services/")
         .then((res) => setVisaTypes(res.data))
         .catch((err) => console.error("Error fetching countries:", err));
     }, []);
@@ -69,7 +69,7 @@ const handleSelect2 = (e) => {
     }
   
     try {
-      const response = await axios.post('http://localhost:8000/visa-inquiry/', data, {
+      const response = await axios.post('https://goforen.com/go_foren/visa-inquiry/', data, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -146,7 +146,7 @@ const handleSelect2 = (e) => {
   // };
 
   useEffect(() => {
-    const backgroundUrl = "assets/img/bg/breadcrumb_bg.jpg";
+    const backgroundUrl = "/assets/pic/breadcrumb-bg.jpg";
     setBackground(backgroundUrl);
   }, []);
   // data-background img end
@@ -164,11 +164,23 @@ const handleSelect2 = (e) => {
       {/* <!-- breadcrumb start --> */}
       <section
         className="breadcrumb pos-rel bg_img"
-        style={{ backgroundImage: `url(${background})` }}
+        style={{ backgroundImage: `url(${background})`,  minHeight: '400px',
+    position: 'relative',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center' }}
       >
-        <div className="container">
+         <div style={{
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)', 
+    zIndex: 1
+  }}></div>
+        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           <div className="breadcrumb__content">
-            <h2 className="breadcrumb__title">Contact Us</h2>
+            <h2 className="breadcrumb__title" style={{color:'#fff'}}>Contact Us</h2>
             <ul className="breadcrumb__list clearfix">
               <li className="breadcrumb-item">
                 <a href="/">Home</a>
